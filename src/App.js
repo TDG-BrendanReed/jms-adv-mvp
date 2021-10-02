@@ -11,6 +11,7 @@ function App() {
   })
 const testArray = ["testing", "arrays", "now"]
   async function loadTasks() {
+    setTasks([])
     try {
         // Uses fetch to call server
         const response = await fetch('/api/tasks');
@@ -19,7 +20,7 @@ const testArray = ["testing", "arrays", "now"]
         // Retrieve tasks, which contains an array of all tasks in database
         console.log(retrievedData)
         const retrievedTasks = retrievedData.tasks;
-        setTasks([])
+        
         // Loop through all tasks
         for (let task of retrievedTasks) {
             // Add each task to the array
