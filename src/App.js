@@ -7,6 +7,7 @@ import './App.css';
 
 function App() {
  const [tasks, setTasks] = useState([])
+ const [arrayCounter, setArrayCounter] = useState(0)
  const [taskInput, setTaskInput] = useState({
     Title: "",
   })
@@ -29,6 +30,7 @@ var taskArray = []
             console.log(taskArray)
         }
       setTasks(taskArray)
+      setArrayCounter(taskArray.length)
     } catch (error) {
         // If there is an error, display a generic message on the page
        console.log("something went wrong")
@@ -67,9 +69,8 @@ var taskArray = []
   };
 
   useEffect(() => {
-        loadTasks()
-    
-  },);
+        loadTasks() 
+  },[arrayCounter]);
 
   return <article>
   <h1>My tasks</h1>
