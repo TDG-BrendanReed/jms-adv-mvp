@@ -1,8 +1,8 @@
 // Load mongoose
-const mongoose = require('mongoose');
+import { connect, Schema, model } from 'mongoose';
 
 // Connect to the database
-mongoose.connect(
+connect(
     process.env.CONNECTION_STRING, // Retrieve connection string
     { // boiler plate values
         useNewUrlParser: true,
@@ -11,7 +11,7 @@ mongoose.connect(
 );
 
 // Create the schema or structure of our object in Mongoose
-const taskSchema = new mongoose.Schema({
+const taskSchema = new Schema({
     title: String, // Add title property of type string
     completed: { // Add completed property
         type: Boolean, // Set type to boolean
@@ -21,10 +21,10 @@ const taskSchema = new mongoose.Schema({
 
 // Create a model using our schema
 // This model will be used to access the database
-const TaskModel = mongoose.model('task', taskSchema);
+const TaskModel = model('task', taskSchema);
 
 // Export our function
-module.exports = async function (context, req) {
+export default async function (context, req) {
     // setup our default content type (we always return JSON)
     context.res = {
         header: {

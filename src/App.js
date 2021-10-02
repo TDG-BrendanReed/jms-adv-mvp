@@ -29,6 +29,7 @@ function App() {
   }
 
   async function postTask() {
+    console.log(taskInput)
     const response = await fetch(
       '/api/tasks', // API location
       {
