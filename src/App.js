@@ -6,10 +6,12 @@ import './App.css';
 
 
 function App() {
+ const [tasks, setTasks] = useState([])
  const [taskInput, setTaskInput] = useState({
     Title: "",
   })
 var taskArray = []
+  
   async function loadTasks() {
     try {
         // Uses fetch to call server
@@ -26,7 +28,7 @@ var taskArray = []
             taskArray.push(task)
             console.log(taskArray)
         }
-      
+      setTasks(taskArray)
     } catch (error) {
         // If there is an error, display a generic message on the page
        console.log("something went wrong")
@@ -62,15 +64,12 @@ var taskArray = []
     // ... submit to API or something
     // Call server
     postTask()
-    
   };
-
-  
 
   useEffect(() => {
         loadTasks()
     
-  });
+  },);
 
   return <article>
   <h1>My tasks</h1>
@@ -82,8 +81,8 @@ var taskArray = []
   <div>
       <button type="button" onClick={handleSubmit}>Add task</button>
   </div>
-  {console.log(taskArray)}
-  {taskArray.map((task, i) => (
+  {console.log(tasks)}
+  {tasks.map((task, i) => (
     <Task i={i} id={task._id} completed={task.completed} title={task.Title} />
   )
   )}
