@@ -5,11 +5,9 @@ import './App.css';
 
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-  const [taskInput, setTaskInput] = useState({
+ const [taskInput, setTaskInput] = useState({
     Title: "",
   })
-const testArray = ["testing", "arrays", "now"]
 var taskArray = []
   async function loadTasks() {
     try {
@@ -25,7 +23,6 @@ var taskArray = []
         for (let task of retrievedTasks) {
             // Add each task to the array
             taskArray.push(task)
-            console.log(tasks);
             console.log(taskArray)
         }
             
