@@ -12,7 +12,7 @@ function App() {
     Title: "",
   })
 var taskArray = []
-  
+setArrayCounter(tasks.length)  
  // 
     
   // }
@@ -64,7 +64,6 @@ var taskArray = []
           console.log(taskArray)
       }
     setTasks(taskArray)
-    setArrayCounter(taskArray.length)
   } catch (error) {
       // If there is an error, display a generic message on the page
      console.log("something went wrong")
@@ -72,7 +71,7 @@ var taskArray = []
      
   }}
   )();
-},[arrayCounter, taskArray]);
+},[arrayCounter]);
 
   return <article>
   <h1>My tasks</h1>
