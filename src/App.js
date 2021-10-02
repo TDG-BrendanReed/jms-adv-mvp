@@ -24,7 +24,7 @@ function App() {
         }    
     } catch {
         // If there is an error, display a generic message on the page
-       console.log('an error occured')
+       console.log(response)
     }
   }
 
@@ -58,7 +58,7 @@ function App() {
   };
 
   useEffect(() => {
-    loadTasks()    
+      
     
   });
 
