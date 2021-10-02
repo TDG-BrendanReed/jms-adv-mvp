@@ -12,7 +12,7 @@ mongoose.connect(
 
 // Create the schema or structure of our object in Mongoose
 const taskSchema = new mongoose.Schema({
-    title: String, // Add title property of type string
+    Title: String, // Add title property of type string
     completed: { // Add completed property
         type: Boolean, // Set type to boolean
         default: false // Set default to false
@@ -62,10 +62,8 @@ async function getTasks(context) {
 async function createTask(context) {
     // Read the uploaded task
     const body = context.req.body;
-    console.log(body);
     // Save to database
     const task = await TaskModel.create(body);
-    console.log(task);
     // Set the HTTP status to created
     context.res.status = 201;
     // return new object
