@@ -24,7 +24,7 @@ function App() {
         }    
     } catch {
         // If there is an error, display a generic message on the page
-       console.log(response)
+       
     }
   }
 
@@ -51,6 +51,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(taskInput);
+    console.log(JSON.stringify(taskInput))
     // ... submit to API or something
     // Call server
     postTask()
@@ -58,7 +59,7 @@ function App() {
   };
 
   useEffect(() => {
-      
+    loadTasks()    
     
   });
 
