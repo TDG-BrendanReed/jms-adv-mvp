@@ -22,7 +22,7 @@ function App() {
         // Loop through all tasks
         for (let task of retrievedTasks) {
             // Add each task to the array
-            setTasks(tasks.push(task));
+            setTasks(tasks.push(task.tasks));
             console.log(tasks);
         }    
     } catch {
