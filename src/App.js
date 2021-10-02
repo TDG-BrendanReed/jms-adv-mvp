@@ -11,11 +11,32 @@ function App() {
  const [taskInput, setTaskInput] = useState({
     Title: "",
   })
-var taskArray = []
-setArrayCounter(tasks.length)  
- // 
+
+ 
+console.log(arrayCounter)
+async function loadData() {
+  try {
+    // Uses fetch to call server
+    const response = await fetch('/api/tasks');
+    // Reads returned JSON, which contains one property called tasks
+    const retrievedData = await response.json();
+    // Retrieve tasks, which contains an array of all tasks in database
+    console.log(retrievedData)
+    const retrievedTasks = retrievedData.tasks;
     
-  // }
+    // Loop through all tasks
+    for (let task of retrievedTasks) {
+        // Add each task to the array
+        setTasks(task.push())
+    }
+  
+} catch (error) {
+    // If there is an error, display a generic message on the page
+   console.log("something went wrong")
+   console.log(error)
+   
+}}
+
 
   async function postTask() {
     console.log(JSON.stringify(taskInput))
@@ -47,31 +68,9 @@ setArrayCounter(tasks.length)
   };
 
   useEffect(() => {
-    (async () => {
-    try {
-      // Uses fetch to call server
-      const response = await fetch('/api/tasks');
-      // Reads returned JSON, which contains one property called tasks
-      const retrievedData = await response.json();
-      // Retrieve tasks, which contains an array of all tasks in database
-      console.log(retrievedData)
-      const retrievedTasks = retrievedData.tasks;
-      
-      // Loop through all tasks
-      for (let task of retrievedTasks) {
-          // Add each task to the array
-          taskArray.push(task)
-          console.log(taskArray)
-      }
-    setTasks(taskArray)
-  } catch (error) {
-      // If there is an error, display a generic message on the page
-     console.log("something went wrong")
-     console.log(error)
-     
-  }}
-  )();
-},[arrayCounter]);
+    loadData()
+    setArrayCounter(tasks.length)
+},[arrayCounter,tasks.length]);
 
   return <article>
   <h1>My tasks</h1>
