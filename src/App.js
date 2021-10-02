@@ -25,9 +25,9 @@ const testArray = ["testing", "arrays", "now"]
             setTasks(tasks.push(task));
             console.log(tasks);
         }    
-    } catch {
+    } catch (error) {
         // If there is an error, display a generic message on the page
-       console.log("test")
+       console.log(error)
     }
   }
 
@@ -41,7 +41,9 @@ const testArray = ["testing", "arrays", "now"]
           headers: {
               'Content-Type': 'application/json' // Set return type to JSON
           }
+          
       }
+      
   );
   console.log('Response: ')
   console.log(response)
@@ -69,17 +71,17 @@ const testArray = ["testing", "arrays", "now"]
   <ul id="task-list"></ul>
 
   <div>
-      <label for="name">Title: </label><input type="text" name="Title" onChange={handleChange} />
+      <label htmlFor="name">Title: </label><input type="text" name="Title" onChange={handleChange} />
   </div>
   <div>
       <button type="button" onClick={handleSubmit}>Add task</button>
   </div>
   {testArray.map((task, i) => (
-    <label > Task: {task} </label>
+    <li key={i}><label > Task: {task} </label></li>
   ))}
 </article>;
 }
 
-// for={task._id} className={task.completed ? 'completed' : ''}
+// htmlFor={task._id} className={task.completed ? 'completed' : ''}
 
 export default App;
