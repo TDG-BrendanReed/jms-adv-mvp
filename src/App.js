@@ -65,6 +65,14 @@ async function loadData() {
   useEffect(() => {
     loadData()
     setArrayCounter(tasks.length)
+
+    const interval=setInterval(()=>{
+      loadData()
+     },10000)     
+       
+     return()=>clearInterval(interval)
+
+
 },[tasks.length, taskInput]);
 
   return <article>
