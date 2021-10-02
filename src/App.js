@@ -6,7 +6,7 @@ import './App.css';
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [taskInput, setTaskInput] = useState(null)
+  const [taskInput, setTaskInput] = useState('')
 
   async function loadTasks() {
     try {
