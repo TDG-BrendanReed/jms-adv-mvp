@@ -79,12 +79,13 @@ var taskArray = []
   <div>
       <button type="button" onClick={handleSubmit}>Add task</button>
   </div>
+  {console.log(taskArray)}
   {taskArray.map((task, i) => (
-    <li key={i}><label > Task: {task} </label></li>
+    <li key={i}><label htmlFor={task._id} className={task.completed ? 'completed' : ''}> Task: {task.Title} </label></li>
   ))}
 </article>;
 }
 
-// htmlFor={task._id} className={task.completed ? 'completed' : ''}
+// 
 
 export default App;
