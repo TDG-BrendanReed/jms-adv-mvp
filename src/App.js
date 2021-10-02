@@ -10,6 +10,7 @@ function App() {
     Title: "",
   })
 const testArray = ["testing", "arrays", "now"]
+var taskArray = []
   async function loadTasks() {
     try {
         // Uses fetch to call server
@@ -19,7 +20,7 @@ const testArray = ["testing", "arrays", "now"]
         // Retrieve tasks, which contains an array of all tasks in database
         console.log(retrievedData)
         const retrievedTasks = retrievedData.tasks;
-        var taskArray = []
+        
         // Loop through all tasks
         for (let task of retrievedTasks) {
             // Add each task to the array
@@ -27,7 +28,7 @@ const testArray = ["testing", "arrays", "now"]
             console.log(tasks);
             console.log(taskArray)
         }
-        setTasks(taskArray);    
+            
     } catch (error) {
         // If there is an error, display a generic message on the page
        console.log("something went wrong")
@@ -81,7 +82,7 @@ const testArray = ["testing", "arrays", "now"]
   <div>
       <button type="button" onClick={handleSubmit}>Add task</button>
   </div>
-  {testArray.map((task, i) => (
+  {taskArray.map((task, i) => (
     <li key={i}><label > Task: {task} </label></li>
   ))}
 </article>;
