@@ -6,7 +6,6 @@ import './App.css';
 
 
 function App() {
-  
  const [taskInput, setTaskInput] = useState({
     Title: "",
   })
@@ -27,7 +26,7 @@ var taskArray = []
             taskArray.push(task)
             console.log(taskArray)
         }
-            
+      
     } catch (error) {
         // If there is an error, display a generic message on the page
        console.log("something went wrong")
