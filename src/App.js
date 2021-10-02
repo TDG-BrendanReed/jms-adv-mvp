@@ -9,7 +9,7 @@ function App() {
   const [taskInput, setTaskInput] = useState({
     Title: "",
   })
-
+const testArray = ["testing", "arrays", "now"]
   async function loadTasks() {
     try {
         // Uses fetch to call server
@@ -22,7 +22,7 @@ function App() {
         // Loop through all tasks
         for (let task of retrievedTasks) {
             // Add each task to the array
-            setTasks(tasks.push(task.tasks));
+            setTasks(tasks.push(task));
             console.log(tasks);
         }    
     } catch {
@@ -74,10 +74,12 @@ function App() {
   <div>
       <button type="button" onClick={handleSubmit}>Add task</button>
   </div>
-  {tasks.map((task, i) => (
-    <label for={task._id} className={task.completed ? 'completed' : ''}> Task: {task.Title} </label>
+  {testArray.map((task, i) => (
+    <label > Task: {task} </label>
   ))}
 </article>;
 }
+
+// for={task._id} className={task.completed ? 'completed' : ''}
 
 export default App;
