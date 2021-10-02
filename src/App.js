@@ -74,6 +74,9 @@ function App() {
   <div>
       <button type="button" onClick={handleSubmit}>Add task</button>
   </div>
+  {tasks.map((task, i) => (
+    <label for={task._id} className={task.completed ? 'completed' : ''}> Task: {task.Title} </label>
+  ))}
 </article>;
 }
 
