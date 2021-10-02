@@ -59,12 +59,13 @@ async function loadData() {
     // ... submit to API or something
     // Call server
     postTask()
+    loadData()
   };
 
   useEffect(() => {
     loadData()
     setArrayCounter(tasks.length)
-},[tasks.length]);
+},[tasks.length, taskInput]);
 
   return <article>
   <h1>My tasks</h1>
