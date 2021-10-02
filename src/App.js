@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Task from './Task';
 
 import './App.css';
 
 
 
 function App() {
+  
  const [taskInput, setTaskInput] = useState({
     Title: "",
   })
@@ -64,6 +66,8 @@ var taskArray = []
     
   };
 
+  
+
   useEffect(() => {
         loadTasks()
     
@@ -81,8 +85,10 @@ var taskArray = []
   </div>
   {console.log(taskArray)}
   {taskArray.map((task, i) => (
-    <li key={i}><label htmlFor={task._id} className={task.completed ? 'completed' : ''}> Task: {task.Title} </label></li>
-  ))}
+    <Task i={i} id={task._id} completed={task.completed} title={task.Title} />
+  )
+  )}
+  
 </article>;
 }
 
