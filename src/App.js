@@ -6,7 +6,9 @@ import './App.css';
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [taskInput, setTaskInput] = useState('')
+  const [taskInput, setTaskInput] = useState({
+    Title: "",
+  })
 
   async function loadTasks() {
     try {
@@ -15,6 +17,7 @@ function App() {
         // Reads returned JSON, which contains one property called tasks
         const retrievedData = await response.json();
         // Retrieve tasks, which contains an array of all tasks in database
+        console.log(retrievedData)
         const retrievedTasks = retrievedData.tasks;
         // Loop through all tasks
         for (let task of retrievedTasks) {
@@ -24,12 +27,12 @@ function App() {
         }    
     } catch {
         // If there is an error, display a generic message on the page
-       
+       console.log("test")
     }
   }
 
   async function postTask() {
-    console.log(taskInput)
+    console.log(JSON.stringify(taskInput))
     const response = await fetch(
       '/api/tasks', // API location
       {
@@ -45,14 +48,11 @@ function App() {
     }
 
   const handleChange = (e) => {
-    setTaskInput(e.target.value);
-    console.log(taskInput)
+    setTaskInput({[e.target.name]: e.target.value});
   };
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(taskInput);
-    console.log(JSON.stringify(taskInput))
     // ... submit to API or something
     // Call server
     postTask()
@@ -60,7 +60,7 @@ function App() {
   };
 
   useEffect(() => {
-        
+        loadTasks()
     
   });
 
@@ -69,7 +69,7 @@ function App() {
   <ul id="task-list"></ul>
 
   <div>
-      <label for="name">Title: </label><input type="text" name="taskInput" onChange={handleChange} />
+      <label for="name">Title: </label><input type="text" name="Title" onChange={handleChange} />
   </div>
   <div>
       <button type="button" onClick={handleSubmit}>Add task</button>

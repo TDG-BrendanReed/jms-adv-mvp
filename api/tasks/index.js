@@ -1,8 +1,8 @@
 // Load mongoose
-import { connect, Schema, model } from 'mongoose';
+const mongoose = require('mongoose');
 
 // Connect to the database
-connect(
+mongoose.connect(
     process.env.CONNECTION_STRING, // Retrieve connection string
     { // boiler plate values
         useNewUrlParser: true,
@@ -11,7 +11,7 @@ connect(
 );
 
 // Create the schema or structure of our object in Mongoose
-const taskSchema = new Schema({
+const taskSchema = new mongoose.Schema({
     title: String, // Add title property of type string
     completed: { // Add completed property
         type: Boolean, // Set type to boolean
@@ -21,10 +21,11 @@ const taskSchema = new Schema({
 
 // Create a model using our schema
 // This model will be used to access the database
-const TaskModel = model('task', taskSchema);
+const TaskModel = mongoose.model('task', taskSchema);
+console.log(TaskModel)
 
 // Export our function
-export default async function (context, req) {
+module.exports = async function (context, req) {
     // setup our default content type (we always return JSON)
     context.res = {
         header: {
@@ -61,8 +62,10 @@ async function getTasks(context) {
 async function createTask(context) {
     // Read the uploaded task
     const body = context.req.body;
+    console.log(body);
     // Save to database
     const task = await TaskModel.create(body);
+    console.log(task);
     // Set the HTTP status to created
     context.res.status = 201;
     // return new object
