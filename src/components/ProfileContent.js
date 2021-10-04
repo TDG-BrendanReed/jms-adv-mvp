@@ -29,7 +29,7 @@ function ProfileContent() {
         RequestProfileData();
       } else {
         console.log("array length is 1");
-        setUser(retrievedData.user);
+        setUser(retrievedData.user[0]);
       }
     } catch (error) {
       // If there is an error, display a generic message on the page
