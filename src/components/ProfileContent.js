@@ -92,7 +92,7 @@ function ProfileContent() {
     <>
       <h5 className="card-title">Welcome {name}</h5>
       {user ? (
-        <ProfileData graphData={user} />
+        <ProfileData user={user} />
       ) : (
         <Button variant="secondary" onClick={loadUser}>
           Check Account
