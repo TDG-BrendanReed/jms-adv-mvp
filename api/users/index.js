@@ -13,6 +13,8 @@ mongoose.connect(
 // Create the schema or structure of our object in Mongoose
 const userSchema = new mongoose.Schema({
   userId: String,
+  status: String,
+  prontoData: {},
   userData: {
     businessPhones: Array,
     givenName: String,
@@ -51,11 +53,10 @@ module.exports = async function (context, req) {
     case "POST":
       await createUser(context);
       break;
-    /* // If put, update task
-        case 'PUT':
-            await updateTask(context);
-            break;
-    */
+    // If put, update task
+    case "PUT":
+      await updateUser(context);
+      break;
   }
 };
 
@@ -79,22 +80,21 @@ async function createUser(context) {
   // return new object
   context.res.body = user;
 }
-/*
+
 // Update an existing function
-async function updateTask(context) {
-    // Grab the id from the URL (stored in bindingData)
-    const id = context.bindingData.id;
-    // Get the task from the body
-    const task = context.req.body;
-    // Update the item in the database
-    const result = await TaskModel.updateOne({ _id: id }, task);
-    // Check to ensure an item was modified
-    if (result.nModified === 1) {
-        // Updated an item, status 204 (empty update)
-        context.res.status = 204;
-    } else {
-        // Item not found, status 404
-        context.res.status = 404;
-    }
+async function updateUser(context) {
+  // Grab the id from the URL (stored in bindingData)
+  const id = context.bindingData.id;
+  // Get the task from the body
+  const user = context.req.body;
+  // Update the item in the database
+  const result = await TaskModel.updateOne({ _id: id }, user);
+  // Check to ensure an item was modified
+  if (result.nModified === 1) {
+    // Updated an item, status 204 (empty update)
+    context.res.status = 204;
+  } else {
+    // Item not found, status 404
+    context.res.status = 404;
+  }
 }
-    */

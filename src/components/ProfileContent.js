@@ -31,8 +31,12 @@ function ProfileContent() {
         RequestProfileData();
       } else {
         console.log("array length is 1");
+        // Put current user into state
         setUser(retrievedData.user[0]);
+        // Update state to show the user has been loaded from DB
         setUserLoaded(true);
+        // Update the user with most current data from MS Graph
+        RequestProfileData();
       }
     } catch (error) {
       // If there is an error, display a generic message on the page
@@ -62,33 +66,80 @@ function ProfileContent() {
     console.log(response);
   }
 
+  async function updateUser(data) {
+    console.log("made it into update function");
+    console.log(data);
+    const requestBody = {
+      userData: data,
+    };
+    const url = "/api/users/" + tempId;
+    const response = await fetch(
+      url, // API location
+      {
+        method: "POST", // POST to create new item
+        body: JSON.stringify(requestBody), // Add task to body
+        headers: {
+          "Content-Type": "application/json", // Set return type to JSON
+        },
+      }
+    );
+    console.log("PUT Response: ");
+    console.log(response);
+  }
+
   function RequestProfileData() {
     const request = {
       ...loginRequest,
       account: accounts[0],
     };
 
-    // Silently acquires an access token which is then attached to a request for Microsoft Graph data
-    instance
-      .acquireTokenSilent(request)
-      .then((response) => {
-        callMsGraph(response.accessToken).then((response) => {
-          console.log(response);
-          console.log("posting user");
-          postUser(response);
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-        instance.acquireTokenPopup(request).then((response) => {
+    if (userLoaded) {
+      // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+      instance
+        .acquireTokenSilent(request)
+        .then((response) => {
           callMsGraph(response.accessToken).then((response) => {
             console.log(response);
-
-            console.log("posting user from catch");
+            console.log("posting user");
             postUser(response);
           });
+        })
+        .catch((e) => {
+          // If silent method fails then try popup method
+          console.log(e);
+          instance.acquireTokenPopup(request).then((response) => {
+            callMsGraph(response.accessToken).then((response) => {
+              console.log(response);
+
+              console.log("posting user from catch");
+              postUser(response);
+            });
+          });
         });
-      });
+    } else {
+      // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+      instance
+        .acquireTokenSilent(request)
+        .then((response) => {
+          callMsGraph(response.accessToken).then((response) => {
+            console.log(response);
+            console.log("updating user");
+            updateUser(response);
+          });
+        })
+        .catch((e) => {
+          // If silent method fails then try popup method
+          console.log(e);
+          instance.acquireTokenPopup(request).then((response) => {
+            callMsGraph(response.accessToken).then((response) => {
+              console.log(response);
+
+              console.log("updating user from catch");
+              updateUser(response);
+            });
+          });
+        });
+    }
   }
 
   useEffect(() => {
