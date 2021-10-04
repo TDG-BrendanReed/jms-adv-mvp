@@ -7,12 +7,7 @@ import { loginRequest } from "../authConfig";
 
 function ProfileContent() {
   const { instance, accounts } = useMsal();
-  const [graphData, setGraphData] = useState(null);
-  const [user, setUser] = useState({
-    MSALData: null,
-    userId: null,
-    userData: {},
-  });
+  const [user, setUser] = useState(null);
   const name = accounts[0] && accounts[0].name;
   const tempId = accounts[0] && accounts[0].localAccountId;
 
@@ -34,6 +29,7 @@ function ProfileContent() {
         RequestProfileData();
       } else {
         console.log("array length is 1");
+        setUser(retrievedData.user);
       }
     } catch (error) {
       // If there is an error, display a generic message on the page
@@ -74,13 +70,7 @@ function ProfileContent() {
       .acquireTokenSilent(request)
       .then((response) => {
         callMsGraph(response.accessToken).then((response) => {
-          setGraphData(response);
           console.log(response);
-          setUser({
-            MSALData: accounts[0] && accounts[0],
-            userId: tempId,
-            userData: response,
-          });
           console.log("posting user");
           postUser(response);
         });
@@ -89,13 +79,8 @@ function ProfileContent() {
         console.log(e);
         instance.acquireTokenPopup(request).then((response) => {
           callMsGraph(response.accessToken).then((response) => {
-            setGraphData(response);
             console.log(response);
-            setUser({
-              MSALData: accounts[0] && accounts[0],
-              userId: tempId,
-              userData: response,
-            });
+
             console.log("posting user from catch");
             postUser(response);
           });
@@ -106,8 +91,8 @@ function ProfileContent() {
   return (
     <>
       <h5 className="card-title">Welcome {name}</h5>
-      {graphData ? (
-        <ProfileData graphData={graphData} />
+      {user ? (
+        <ProfileData graphData={user} />
       ) : (
         <Button variant="secondary" onClick={loadUser}>
           Check Account
