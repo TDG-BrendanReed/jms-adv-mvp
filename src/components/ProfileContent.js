@@ -80,28 +80,35 @@ function ProfileContent() {
 
         // Silently acquires an access token which is then attached to a request for Microsoft Graph data
         instance.acquireTokenSilent(request).then((response) => {
-            callMsGraph(response.accessToken).then(response => setGraphData(response));
-            setUser({
-                firstName: graphData.givenName,
-                surname: graphData.surname,
-                email: graphData.userPrincipalName
-            })
+            callMsGraph(response.accessToken).then(response => {
+                setGraphData(response)
+                setUser({
+                    firstName: graphData.givenName,
+                    surname: graphData.surname,
+                    email: graphData.userPrincipalName
+                })
+                console.log(user)
+            });
+            
             console.log("posting user")
             console.log(user)
             postUser()
             
             
         }).catch((e) => {
+            console.log(e)
             instance.acquireTokenPopup(request).then((response) => {
-                callMsGraph(response.accessToken).then(response => setGraphData(response));
+                callMsGraph(response.accessToken).then(response => {
+                    setGraphData(response)
+                    setUser({
+                        firstName: graphData.givenName,
+                        surname: graphData.surname,
+                        email: graphData.userPrincipalName
+                    })
+                    console.log(user)
+                });
                 console.log("posting user from catch")
-                setUser({
-                    firstName: graphData.givenName,
-                    surname: graphData.surname,
-                    email: graphData.userPrincipalName
-                })
-                console.log("posting user")
-                console.log(user)
+                
                 postUser()
                 
             });
