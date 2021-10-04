@@ -9,6 +9,7 @@ import { loginRequest } from "../authConfig";
 function ProfileContent() {
   const { instance, accounts } = useMsal();
   const [user, setUser] = useState(null);
+  const [userLoaded, setUserLoaded] = useState(false);
   const name = accounts[0] && accounts[0].name;
   const tempId = accounts[0] && accounts[0].localAccountId;
 
@@ -31,6 +32,7 @@ function ProfileContent() {
       } else {
         console.log("array length is 1");
         setUser(retrievedData.user[0]);
+        setUserLoaded(true);
       }
     } catch (error) {
       // If there is an error, display a generic message on the page
@@ -90,8 +92,10 @@ function ProfileContent() {
   }
 
   useEffect(() => {
-    loadUser();
-  }, [user]);
+    if (!userLoaded) {
+      loadUser();
+    }
+  }, [userLoaded]);
 
   console.log(user);
   return (
