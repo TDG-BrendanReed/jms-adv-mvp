@@ -11,20 +11,13 @@ function ProfileContent() {
   const [user, setUser] = useState({
     MSALData: null,
     userId: null,
-    firstName: null,
-    surname: null,
-    email: null,
+    userData: {},
   });
   const name = accounts[0] && accounts[0].name;
   const tempId = accounts[0] && accounts[0].localAccountId;
 
   async function loadUser() {
-    setUser({
-      MSALData: accounts[0] && accounts[0],
-      userId: tempId,
-    });
     console.log(tempId);
-    console.log(user);
     const url = "/api/users/" + tempId;
     try {
       // Uses fetch to call server
@@ -49,13 +42,18 @@ function ProfileContent() {
     }
   }
 
-  async function postUser() {
+  async function postUser(data) {
     console.log("made it into function");
+    console.log(data);
+    const requestBody = {
+      userId: tempId,
+      userData: data,
+    };
     const response = await fetch(
       "/api/users", // API location
       {
         method: "POST", // POST to create new item
-        body: JSON.stringify(user), // Add task to body
+        body: JSON.stringify(requestBody), // Add task to body
         headers: {
           "Content-Type": "application/json", // Set return type to JSON
         },
@@ -81,13 +79,10 @@ function ProfileContent() {
           setUser({
             MSALData: accounts[0] && accounts[0],
             userId: tempId,
-            firstName: response.givenName,
-            surname: response.surname,
-            email: response.userPrincipalName,
+            userData: response,
           });
           console.log("posting user");
-          console.log(user);
-          postUser();
+          postUser(response);
         });
       })
       .catch((e) => {
@@ -99,18 +94,15 @@ function ProfileContent() {
             setUser({
               MSALData: accounts[0] && accounts[0],
               userId: tempId,
-              firstName: response.givenName,
-              surname: response.surname,
-              email: response.userPrincipalName,
+              userData: response,
             });
             console.log("posting user from catch");
-            console.log(user);
-            postUser();
+            postUser(response);
           });
         });
       });
   }
-
+  console.log(user);
   return (
     <>
       <h5 className="card-title">Welcome {name}</h5>
