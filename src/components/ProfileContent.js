@@ -21,7 +21,7 @@ function ProfileContent() {
             userId: tempId
         })
         console.log(tempId)
-        
+        console.log(user)
         const url = "/api/users/"+tempId;
         try {
           // Uses fetch to call server

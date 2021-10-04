@@ -1,22 +1,19 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React from 'react';
 import { PageLayout } from "./components/PageLayout";
-import { AuthenticatedTemplate, UnauthenticatedTemplate, useIsAuthenticated } from "@azure/msal-react";
+import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 import ProfileContent from './components/ProfileContent'
-import Task from './Task';
+
 
 
 import './App.css';
 
 function App() {
- const [tasks, setTasks] = useState([])
- const [taskInput, setTaskInput] = useState({
-    Title: "",
-  })
- const [user, setUser] = useState({
-    msalData: null,
-    userId: null
-  })
+ // const [tasks, setTasks] = useState([])
+ //const [taskInput, setTaskInput] = useState({
+ //   Title: "",
+ // })
 
+/*
 async function loadData() {
   try {
     // Uses fetch to call server
@@ -50,8 +47,8 @@ async function postTask() {
   console.log('Response: ')
   console.log(response)
     }
-
-  const handleChange = (e) => {
+*/
+  /* const handleChange = (e) => {
     setTaskInput({[e.target.name]: e.target.value});
   };
 
@@ -62,7 +59,7 @@ async function postTask() {
     postTask()
     loadData()
   };
-
+*/
 // useEffect(() => {
 
     // loadData()
