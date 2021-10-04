@@ -88,7 +88,7 @@ async function updateUser(context) {
   // Get the task from the body
   const user = context.req.body;
   // Update the item in the database
-  const result = await TaskModel.updateOne({ _id: id }, user);
+  const result = await TaskModel.updateOne({ userId: id }, user);
   // Check to ensure an item was modified
   if (result.nModified === 1) {
     // Updated an item, status 204 (empty update)
