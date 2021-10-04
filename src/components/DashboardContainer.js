@@ -6,7 +6,7 @@ import { callMsGraph } from "../graph";
 import { ProfileData } from "./ProfileData";
 import { loginRequest } from "../authConfig";
 
-function ProfileContent() {
+function DashboardContainer() {
   const { instance, accounts } = useMsal();
   const [user, setUser] = useState(null);
   const [userLoaded, setUserLoaded] = useState(false);
@@ -167,4 +167,4 @@ function ProfileContent() {
   );
 }
 
-export default ProfileContent;
+export default DashboardContainer;

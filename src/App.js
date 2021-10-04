@@ -1,19 +1,21 @@
-import React from 'react';
+import React from "react";
 import { PageLayout } from "./components/PageLayout";
-import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
-import ProfileContent from './components/ProfileContent'
+import {
+  AuthenticatedTemplate,
+  UnauthenticatedTemplate,
+} from "@azure/msal-react";
+import DashboardContainer from "./components/DashboardContainer";
+import LoginLanding from "./LoginLanding";
 
-
-
-import './App.css';
+import "./App.css";
 
 function App() {
- // const [tasks, setTasks] = useState([])
- //const [taskInput, setTaskInput] = useState({
- //   Title: "",
- // })
+  // const [tasks, setTasks] = useState([])
+  //const [taskInput, setTaskInput] = useState({
+  //   Title: "",
+  // })
 
-/*
+  /*
 async function loadData() {
   try {
     // Uses fetch to call server
@@ -60,32 +62,33 @@ async function postTask() {
     loadData()
   };
 */
-// useEffect(() => {
+  // useEffect(() => {
 
-    // loadData()
-    // setArrayCounter(tasks.length)
+  // loadData()
+  // setArrayCounter(tasks.length)
 
-    // const interval=setInterval(()=>{
-    //  loadData()
-    // },10000)     
-       
-    // return()=>clearInterval(interval)
+  // const interval=setInterval(()=>{
+  //  loadData()
+  // },10000)
 
+  // return()=>clearInterval(interval)
 
-//},[tasks.length, taskInput]);
+  //},[tasks.length, taskInput]);
 
   return (
-    <PageLayout>
-    <AuthenticatedTemplate>
-                <ProfileContent />
-            </AuthenticatedTemplate>
-            <UnauthenticatedTemplate>
-                <p>You are not signed in! Please sign in.</p>
-            </UnauthenticatedTemplate>
-    </PageLayout>
-    )
+    <div>
+      <AuthenticatedTemplate>
+        <PageLayout>
+          <DashboardContainer />
+        </PageLayout>
+      </AuthenticatedTemplate>
+      <UnauthenticatedTemplate>
+        <LoginLanding />
+      </UnauthenticatedTemplate>
+    </div>
+  );
 
- /* <article>
+  /* <article>
   <h1>My tasks</h1>
   <ul id="task-list"></ul>
   
@@ -107,16 +110,13 @@ async function postTask() {
   )}
   
 </article> */
-
-
-
 }
 
-// 
+//
 
 export default App;
 
-  /*
+/*
 
   <Container>
     {items.map(index => {

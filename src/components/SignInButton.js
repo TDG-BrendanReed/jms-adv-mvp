@@ -10,7 +10,7 @@ function handleLogin(instance) {
 }
 
 /**
- * Renders a button which, when selected, will open a popup for login
+ * Renders a button which, when selected, will redirect for login
  */
 export const SignInButton = () => {
   const { instance } = useMsal();
@@ -20,7 +20,7 @@ export const SignInButton = () => {
       variant="secondary"
       className="ml-auto"
       onClick={() => handleLogin(instance)}>
-      Sign in using Redirect
+      Sign In
     </Button>
   );
 };
