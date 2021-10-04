@@ -4,12 +4,11 @@ import {
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
 } from "@azure/msal-react";
-import { Switch, Route } from "react-router-dom";
+
 import DashboardContainer from "./components/DashboardContainer";
 import LoginLanding from "./LoginLanding";
 
 import "./App.css";
-import { SignInButton } from "./components/SignInButton";
 
 function App() {
   // const [tasks, setTasks] = useState([])
@@ -82,22 +81,6 @@ async function postTask() {
       <AuthenticatedTemplate>
         <PageLayout>
           <DashboardContainer />
-          <>
-            <Switch>
-              <Route path="/Users">
-                <SignInButton />
-                <SignInButton />
-              </Route>
-              <Route path="/Orders">
-                <SignInButton />
-                <SignInButton />
-                <SignInButton />
-              </Route>
-              <Route path="/">
-                <SignInButton />
-              </Route>
-            </Switch>
-          </>
         </PageLayout>
       </AuthenticatedTemplate>
       <UnauthenticatedTemplate>

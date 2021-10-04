@@ -3,7 +3,7 @@ import React from "react";
 /**
  * Renders information about the user obtained from Microsoft Graph
  */
-export const ProfileData = (props) => {
+function ProfileData(props) {
   console.log(props);
   return (
     <div id="profile-div">
@@ -21,4 +21,6 @@ export const ProfileData = (props) => {
       </p>
     </div>
   );
-};
+}
+
+export default ProfileData;

@@ -4,6 +4,8 @@ import { Spinner } from "react-bootstrap";
 import { useMsal } from "@azure/msal-react";
 import { callMsGraph } from "../graph";
 import { loginRequest } from "../authConfig";
+import ProfileData from "./ProfileData";
+import { Switch, Route } from "react-router-dom";
 
 function DashboardContainer() {
   const { instance, accounts } = useMsal();
@@ -156,7 +158,24 @@ function DashboardContainer() {
   return (
     <>
       <h5 className="card-title">Welcome {name}</h5>
-      {user ? null : (
+      {user ? (
+        <>
+          <Switch>
+            <Route path="/Users">
+              <ProfileData user={user} />
+            </Route>
+            <Route path="/Orders">
+              <ProfileData user={user} />
+              <ProfileData user={user} />
+            </Route>
+            <Route path="/">
+              <ProfileData user={user} />
+              <ProfileData user={user} />
+              <ProfileData user={user} />
+            </Route>
+          </Switch>
+        </>
+      ) : (
         <center>
           <Spinner variant="primary" animation="grow" role="status">
             <span className="visually-hidden">Loading...</span>
