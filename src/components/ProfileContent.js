@@ -75,7 +75,7 @@ function ProfileContent() {
       userData: data,
       status: "Active",
     };
-    const url = "/api/users/" + user.user._id;
+    const url = "/api/users/" + user.userData._id;
     console.log("update URL" + url);
     const response = await fetch(
       url, // API location
