@@ -84,9 +84,6 @@ async function postTask() {
           <DashboardContainer />
           <>
             <Switch>
-              <Route path="/">
-                <SignInButton />
-              </Route>
               <Route path="/Users">
                 <SignInButton />
                 <SignInButton />
@@ -94,6 +91,9 @@ async function postTask() {
               <Route path="/Orders">
                 <SignInButton />
                 <SignInButton />
+                <SignInButton />
+              </Route>
+              <Route path="/">
                 <SignInButton />
               </Route>
             </Switch>
