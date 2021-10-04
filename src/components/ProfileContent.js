@@ -34,7 +34,7 @@ function ProfileContent() {
           const retrievedData = await response.json();
           // Retrieve tasks, which contains an array of all tasks in database
           console.log("retrieve user")
-          console.log(retrievedData.user)
+          console.log(retrievedData.user.lenth)
           if(retrievedData.user.length < 1){
             console.log("requesting profile data flow")  
             RequestProfileData()
@@ -98,7 +98,7 @@ function ProfileContent() {
                 
             });
         });
-        loadUser();
+        
     }
 
     return (
@@ -107,7 +107,7 @@ function ProfileContent() {
             {graphData ? 
                 <ProfileData graphData={graphData} />
                 :
-                <Button variant="secondary" onClick={RequestProfileData}>Check Account</Button>
+                <Button variant="secondary" onClick={loadUser}>Check Account</Button>
             }
         </>
     );
