@@ -40,7 +40,7 @@ function ProfileContent() {
             console.log("requesting profile data flow")  
             RequestProfileData()
           } else {
-              console.log("array length less than 1")
+              console.log("array length is 1")
           }
 
           
@@ -95,6 +95,13 @@ function ProfileContent() {
             instance.acquireTokenPopup(request).then((response) => {
                 callMsGraph(response.accessToken).then(response => setGraphData(response));
                 console.log("posting user from catch")
+                setUser({
+                    firstName: graphData.givenName,
+                    surname: graphData.surname,
+                    email: graphData.userPrincipalName
+                })
+                console.log("posting user")
+                console.log(user)
                 postUser()
                 
             });
