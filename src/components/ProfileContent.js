@@ -30,11 +30,12 @@ function ProfileContent() {
           // Uses fetch to call server
           const response = await fetch(url);
           console.log(response)
-          // Reads returned JSON, which contains one property called tasks
+
           const retrievedData = await response.json();
-          // Retrieve tasks, which contains an array of all tasks in database
+
           console.log("retrieve user")
-          console.log(retrievedData.user.lenth)
+          console.log(retrievedData)
+          console.log(retrievedData.user.length)
           if(retrievedData.user.length < 1){
             console.log("requesting profile data flow")  
             RequestProfileData()
