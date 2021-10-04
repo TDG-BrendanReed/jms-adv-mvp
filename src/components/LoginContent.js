@@ -4,7 +4,7 @@ import { SignInButton } from "./SignInButton";
 
 const LoginContent = (props) => (
   <div>
-    <div id="button" class="row">
+    <div id="button" className="row">
       <SignInButton />
     </div>
   </div>
