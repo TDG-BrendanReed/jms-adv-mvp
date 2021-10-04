@@ -11,10 +11,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const msalInstance = new PublicClientApplication(msalConfig);
 
 ReactDOM.render(
-  <Router>
-    <MsalProvider instance={msalInstance}>
+  <MsalProvider instance={msalInstance}>
+    <Router>
       <App />
-    </MsalProvider>
-  </Router>,
+    </Router>
+  </MsalProvider>,
   document.getElementById("root")
 );
