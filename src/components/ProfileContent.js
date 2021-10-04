@@ -87,12 +87,12 @@ function ProfileContent() {
                     surname: graphData.surname,
                     email: graphData.userPrincipalName
                 })
+                console.log("posting user")
                 console.log(user)
+                postUser()
             });
             
-            console.log("posting user")
-            console.log(user)
-            postUser()
+            
             
             
         }).catch((e) => {
@@ -105,11 +105,12 @@ function ProfileContent() {
                         surname: graphData.surname,
                         email: graphData.userPrincipalName
                     })
+                    console.log("posting user from catch")
                     console.log(user)
+                    postUser()
+                    
                 });
-                console.log("posting user from catch")
                 
-                postUser()
                 
             });
         });
