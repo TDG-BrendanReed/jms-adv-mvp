@@ -75,7 +75,7 @@ function ProfileContent() {
       userData: data,
       status: "Active",
     };
-    const url = "/api/users/" + user._id;
+    const url = "/api/users/" + user.user._id;
     console.log("update URL" + url);
     const response = await fetch(
       url, // API location
@@ -96,7 +96,7 @@ function ProfileContent() {
       ...loginRequest,
       account: accounts[0],
     };
-    console.log(userLoaded);
+    console.log(loadStatus);
     if (!loadStatus) {
       // Silently acquires an access token which is then attached to a request for Microsoft Graph data
       instance
