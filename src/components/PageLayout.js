@@ -9,7 +9,7 @@ import { SignOutButton } from "./SignOutButton";
 export const PageLayout = (props) => {
   return (
     <>
-      <Navbar bg="light" variant="dark">
+      <Navbar bg="light">
         <Container>
           <a className="navbar-brand" href="/">
             MVP
