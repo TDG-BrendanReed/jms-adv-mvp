@@ -64,6 +64,7 @@ function DashboardContainer() {
         },
       }
     );
+    setUserLoaded(false);
     console.log("Response: ");
     console.log(response);
   }
@@ -73,7 +74,7 @@ function DashboardContainer() {
     console.log(data);
     const requestBody = {
       userData: data,
-      status: "Active",
+      status: "Test",
     };
     const url = "/api/users/" + tempId;
     console.log("update URL" + url);
