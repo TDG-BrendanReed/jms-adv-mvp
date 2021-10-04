@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Nav, NavDropdown } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 import { SignOutButton } from "./SignOutButton";
 
 /**
@@ -11,21 +12,33 @@ export const PageLayout = (props) => {
     <>
       <Navbar bg="light">
         <Container>
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             MVP
-          </a>
+          </Link>
           <Navbar.Brand to="/">React-Bootstrap</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link to="/">Home</Nav.Link>
-              <Nav.Link to="/Users">Link</Nav.Link>
+              <Nav.Link>
+                <Link to="/">Home</Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to="/Users">Link</Link>
+              </Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item to="/Assets">Action</NavDropdown.Item>
-                <NavDropdown.Item to="/Orders">Another action</NavDropdown.Item>
-                <NavDropdown.Item to="/">Something</NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/Assets">Assets</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/Order">Another action</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/">Something</Link>
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item to="/">Separated link</NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/">Separated link</Link>
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
