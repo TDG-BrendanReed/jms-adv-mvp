@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Nav, NavDropdown } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
-import { NavLink } from "react-router-dom";
 import { SignOutButton } from "./SignOutButton";
 
 /**
@@ -19,8 +18,8 @@ export const PageLayout = (props) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavLink to="/">Home</NavLink>
-              <NavLink to="/Users">Link</NavLink>
+              <Nav.Link to="/">Home</Nav.Link>
+              <Nav.Link to="/Users">Link</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item to="/Assets">Action</NavDropdown.Item>
                 <NavDropdown.Item to="/Orders">Another action</NavDropdown.Item>
