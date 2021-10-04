@@ -77,7 +77,10 @@ function ProfileContent() {
       .then((response) => {
         callMsGraph(response.accessToken).then((response) => {
           setGraphData(response);
+          console.log(response);
           setUser({
+            MSALData: accounts[0] && accounts[0],
+            userId: tempId,
             firstName: response.givenName,
             surname: response.surname,
             email: response.userPrincipalName,
@@ -92,7 +95,10 @@ function ProfileContent() {
         instance.acquireTokenPopup(request).then((response) => {
           callMsGraph(response.accessToken).then((response) => {
             setGraphData(response);
+            console.log(response);
             setUser({
+              MSALData: accounts[0] && accounts[0],
+              userId: tempId,
               firstName: response.givenName,
               surname: response.surname,
               email: response.userPrincipalName,
