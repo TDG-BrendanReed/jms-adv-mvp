@@ -3,12 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@azure/msal-browser": "^2.17.0",
+    "@azure/msal-react": "^1.0.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "bootstrap": "^5.1.1",
+    "loadash": "^1.0.0",
+    "lodash": "^4.17.21",
     "react": "^16.14.0",
+    "react-beautiful-dnd": "^13.1.0",
+    "react-bootstrap": "^2.0.0-rc.0",
     "react-dom": "^16.14.0",
+    "react-dropzone": "^11.4.2",
+    "react-router": "^5.2.1",
+    "react-router-bootstrap": "^0.25.0",
+    "react-router-dom": "^5.3.0",
     "react-scripts": "3.4.0",
+    "styled-components": "^5.3.1",
     "yarn": "^1.22.15"
   },
   "scripts": {
@@ -27,7 +39,7 @@
       "not dead",
       "not op_mini all"
     ],
-  "development": [
+    "development": [
       ">0.3%",
       "not ie 11",
       "not dead",

@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { PageLayout } from "./components/PageLayout";
+import { AuthenticatedTemplate, UnauthenticatedTemplate, useIsAuthenticated } from "@azure/msal-react";
+import ProfileContent from './components/ProfileContent'
 import Task from './Task';
+
 
 import './App.css';
 
-
-
 function App() {
  const [tasks, setTasks] = useState([])
- const [arrayCounter, setArrayCounter] = useState(0)
  const [taskInput, setTaskInput] = useState({
     Title: "",
   })
+ const [user, setUser] = useState({
+    msalData: null,
+    userId: null
+  })
 
- 
-console.log(arrayCounter)
 async function loadData() {
   try {
     // Uses fetch to call server
@@ -30,9 +33,7 @@ async function loadData() {
    console.log(error)
    
 }}
-
-
-  async function postTask() {
+async function postTask() {
     console.log(JSON.stringify(taskInput))
     const response = await fetch(
       '/api/tasks', // API location
@@ -62,26 +63,43 @@ async function loadData() {
     loadData()
   };
 
-  useEffect(() => {
-    loadData()
-    setArrayCounter(tasks.length)
+// useEffect(() => {
 
-    const interval=setInterval(()=>{
-      loadData()
-     },10000)     
+    // loadData()
+    // setArrayCounter(tasks.length)
+
+    // const interval=setInterval(()=>{
+    //  loadData()
+    // },10000)     
        
-     return()=>clearInterval(interval)
+    // return()=>clearInterval(interval)
 
 
-},[tasks.length, taskInput]);
+//},[tasks.length, taskInput]);
 
-  return <article>
+  return (
+    <PageLayout>
+    <AuthenticatedTemplate>
+                <ProfileContent />
+            </AuthenticatedTemplate>
+            <UnauthenticatedTemplate>
+                <p>You are not signed in! Please sign in.</p>
+            </UnauthenticatedTemplate>
+    </PageLayout>
+    )
+
+ /* <article>
   <h1>My tasks</h1>
   <ul id="task-list"></ul>
-
+  
+   
   <div>
       <label htmlFor="name">Title: </label><input type="text" name="Title" onChange={handleChange} />
   </div>
+  <main className="App">
+      <h1 className="text-center">Drag and Drop Example</h1>
+      
+    </main>
   <div>
       <button type="button" onClick={handleSubmit}>Add task</button>
   </div>
@@ -91,9 +109,32 @@ async function loadData() {
   )
   )}
   
-</article>;
+</article> */
+
+
+
 }
 
 // 
 
 export default App;
+
+  /*
+
+  <Container>
+    {items.map(index => {
+      const isDragging = orderState.draggedIndex === index;
+      const draggedTop = orderState.order.indexOf(index) * (HEIGHT + 10);
+      const top = orderState.dragOrder.indexOf(index) * (HEIGHT + 10);
+
+      return(
+        <Draggable key={index} id={index} onDrag={handleDrag} onDragEnd={handleDragEnd}>
+        <Rect key={index} isDragging={isDragging} top={isDragging ? draggedTop : top}>
+          {index}</Rect>
+</Draggable>
+      )
+    })}
+    </Container>
+    <Rect />
+
+  */
