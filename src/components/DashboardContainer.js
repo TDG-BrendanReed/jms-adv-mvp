@@ -91,9 +91,9 @@ function DashboardContainer() {
     );
     console.log("PUT Response: ");
     console.log(response);
-    if (!userLoaded) {
-      loadUser();
-    }
+    // if (!userLoaded) {
+    //   loadUser();
+    // }
   }
 
   function RequestProfileData(loadStatus) {
