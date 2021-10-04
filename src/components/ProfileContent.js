@@ -80,7 +80,7 @@ function ProfileContent() {
     const response = await fetch(
       url, // API location
       {
-        method: "POST", // POST to create new item
+        method: "PUT", // POST to create new item
         body: JSON.stringify(requestBody), // Add task to body
         headers: {
           "Content-Type": "application/json", // Set return type to JSON
