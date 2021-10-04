@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Nav, NavDropdown } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
+import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { SignOutButton } from "./SignOutButton";
 
@@ -19,26 +20,26 @@ export const PageLayout = (props) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link>
-                <Link to="/">Home</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/Users">Link</Link>
-              </Nav.Link>
+              <LinkContainer to="/">
+                <Nav.Link>Home</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/Users">
+                <Nav.Link>Link</Nav.Link>
+              </LinkContainer>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item>
-                  <Link to="/Assets">Assets</Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link to="/Order">Another action</Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link to="/">Something</Link>
-                </NavDropdown.Item>
+                <LinkContainer to="/Assets">
+                  <NavDropdown.Item>Assets</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/Orders">
+                  <NavDropdown.Item>Another action</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/Orders">
+                  <NavDropdown.Item>Something</NavDropdown.Item>
+                </LinkContainer>
                 <NavDropdown.Divider />
-                <NavDropdown.Item>
-                  <Link to="/">Separated link</Link>
-                </NavDropdown.Item>
+                <LinkContainer to="/Orders">
+                  <NavDropdown.Item>Separated link</NavDropdown.Item>
+                </LinkContainer>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
