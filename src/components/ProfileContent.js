@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import { useMsal } from "@azure/msal-react";
