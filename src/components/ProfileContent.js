@@ -28,15 +28,17 @@ function ProfileContent() {
       console.log(retrievedData.user.length);
       if (retrievedData.user.length < 1) {
         console.log("requesting profile data flow");
-        RequestProfileData();
+        const tempLoadStatus = false;
+        RequestProfileData(tempLoadStatus);
       } else {
         console.log("array length is 1");
         // Put current user into state
         setUser(retrievedData.user[0]);
         // Update state to show the user has been loaded from DB
         setUserLoaded(true);
+        const tempLoadStatus = true;
         // Update the user with most current data from MS Graph
-        RequestProfileData();
+        RequestProfileData(tempLoadStatus);
       }
     } catch (error) {
       // If there is an error, display a generic message on the page
@@ -71,8 +73,10 @@ function ProfileContent() {
     console.log(data);
     const requestBody = {
       userData: data,
+      status: "Active",
     };
-    const url = "/api/users/" + tempId;
+    const url = "/api/users/" + user._id;
+    console.log("update URL" + url);
     const response = await fetch(
       url, // API location
       {
@@ -87,13 +91,13 @@ function ProfileContent() {
     console.log(response);
   }
 
-  function RequestProfileData() {
+  function RequestProfileData(loadStatus) {
     const request = {
       ...loginRequest,
       account: accounts[0],
     };
-
-    if (userLoaded) {
+    console.log(userLoaded);
+    if (!loadStatus) {
       // Silently acquires an access token which is then attached to a request for Microsoft Graph data
       instance
         .acquireTokenSilent(request)
