@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Spinner } from "react-bootstrap";
 import { useMsal } from "@azure/msal-react";
 import { callMsGraph } from "../graph";
 import { ProfileData } from "./ProfileData";
@@ -87,6 +87,11 @@ function ProfileContent() {
         });
       });
   }
+
+  useEffect(() => {
+    loadUser();
+  }, [user]);
+
   console.log(user);
   return (
     <>
@@ -94,9 +99,9 @@ function ProfileContent() {
       {user ? (
         <ProfileData user={user} />
       ) : (
-        <Button variant="secondary" onClick={loadUser}>
-          Check Account
-        </Button>
+        <Spinner variant="primary" animation="grow" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
       )}
     </>
   );
