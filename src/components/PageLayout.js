@@ -2,7 +2,6 @@ import React from "react";
 import { Container, Nav, NavDropdown } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
 import { SignOutButton } from "./SignOutButton";
 
 /**
@@ -13,10 +12,9 @@ export const PageLayout = (props) => {
     <>
       <Navbar bg="light">
         <Container>
-          <Link className="navbar-brand" to="/">
-            MVP
-          </Link>
-          <Navbar.Brand to="/">React-Bootstrap</Navbar.Brand>
+          <LinkContainer to="/">
+            <Navbar.Brand> MVP </Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
