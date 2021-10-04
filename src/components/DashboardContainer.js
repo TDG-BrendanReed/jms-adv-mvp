@@ -158,11 +158,18 @@ function DashboardContainer() {
     <>
       <h5 className="card-title">Welcome {name}</h5>
       {user ? (
-        <ProfileData user={user} />
+        <>
+          <ProfileData user={user} />
+          <ProfileData user={user} />
+          <ProfileData user={user} />
+          <ProfileData user={user} />
+        </>
       ) : (
-        <Spinner variant="primary" animation="grow" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+        <center>
+          <Spinner variant="primary" animation="grow" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </center>
       )}
     </>
   );
