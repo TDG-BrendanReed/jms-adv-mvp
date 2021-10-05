@@ -47,9 +47,7 @@ function JobList(props) {
       console.log(tempArray);
       // check if this id is already in the array for this job
       // if it is then we stop the assignment
-      const checkDuplicate = jobArray[droppableSplit[2]].users.some(
-        (user) => user._id === draggableId
-      );
+      const checkDuplicate = tempArray.some(draggableId);
       console.log("check dupe:" + checkDuplicate);
       if (!checkDuplicate) {
         tempArray.splice(destination.index, 0, draggableId);
