@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Container, Table, Row, Col, Card } from "react-bootstrap";
 
@@ -8,7 +8,6 @@ function JobList(props) {
   console.log(props.jobList);
   console.log(props.userList);
   console.log(jobArray);
-  setJobArray(props.jobList.jobs);
 
   function onDragEnd(result) {
     console.log(result);
@@ -38,6 +37,10 @@ function JobList(props) {
       setJobArray(() => tempJobArray);
     }
   }
+
+  useEffect(() => {
+    setJobArray(props.jobList.jobs);
+  }, [props.jobList.jobs]);
 
   return (
     <>
