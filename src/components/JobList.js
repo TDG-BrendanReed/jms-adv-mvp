@@ -10,17 +10,10 @@ function JobList(props) {
   console.log(jobArray);
 
   function displayUserName(userId) {
-    const userDisplayNameIndex = props.userList.user.find(function (user, i) {
-      console.log(i + " : " + user._id);
-      console.log(userId);
-      if (user._id === userId) {
-        console.log("true");
-        return i;
-      } else {
-        console.log("false");
-        return null;
-      }
-    });
+    const userDisplayNameIndex = props.userList.user.find(
+      (user) => user._id === userId
+    );
+
     console.log(userDisplayNameIndex);
 
     if (userDisplayNameIndex) {
