@@ -6,6 +6,7 @@ import JobList from "../components/JobList";
 
 function DashboardContainer() {
   const [jobs, setJobs] = useState(null);
+  const [users, setUsers] = useState(null);
   const [jobInput, setJobInput] = useState({
     users: null,
     assets: null,
@@ -15,6 +16,23 @@ function DashboardContainer() {
   });
 
   console.log(jobInput);
+  async function loadUser() {
+    try {
+      // Uses fetch to call server
+      const response = await fetch("/api/users/all");
+      console.log(response);
+
+      const retrievedData = await response.json();
+
+      console.log("retrieve user");
+      console.log(retrievedData);
+      setUsers(retrievedData);
+    } catch (error) {
+      // If there is an error, display a generic message on the page
+      console.log("something went wrong");
+      console.log(error.message);
+    }
+  }
   async function loadJob() {
     try {
       // Uses fetch to call server
@@ -89,6 +107,7 @@ function DashboardContainer() {
 
   useEffect(() => {
     loadJob();
+    loadUser();
     const interval = setInterval(() => {
       loadJob();
     }, 10000);
@@ -125,7 +144,7 @@ function DashboardContainer() {
         <h6> Job List: </h6>
         <br />
         {jobs ? (
-          <JobList jobList={jobs} />
+          <JobList jobList={jobs} userList={users} />
         ) : (
           <center>
             <Spinner variant="primary" animation="grow" role="status">
