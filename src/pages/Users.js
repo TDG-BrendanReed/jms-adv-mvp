@@ -52,6 +52,11 @@ function DashboardContainer() {
 
   useEffect(() => {
     loadUser();
+    const interval = setInterval(() => {
+      loadUser();
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, []);
 
   console.log(users);
