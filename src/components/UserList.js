@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 
 function UserList(users) {
+  console.log(users);
   return (
     <>
       <Table striped bordered hover size="sm">
