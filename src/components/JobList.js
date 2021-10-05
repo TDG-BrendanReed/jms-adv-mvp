@@ -22,11 +22,9 @@ function JobList(props) {
       }
     });
     console.log(userDisplayNameIndex);
-    console.log(props.userList.user[userDisplayNameIndex]);
+
     if (userDisplayNameIndex) {
-      return (
-        <p>{props.userList.user[userDisplayNameIndex].userData.displayName}</p>
-      );
+      return <p>{userDisplayNameIndex.userData.displayName}</p>;
     } else {
       return null;
     }
