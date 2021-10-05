@@ -5,12 +5,8 @@
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "methods": [
-        "get",
-        "post",
-        "put"
-      ],
-      "route": "users/{id?}"
+      "methods": ["get", "post", "put"],
+      "route": "assets/{id?}"
     },
     {
       "type": "http",
