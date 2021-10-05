@@ -10,8 +10,12 @@ function JobList(props) {
   console.log(jobArray);
 
   function displayUserName(userId) {
-    userDisplayNameIndex = props.userList.user.find(function (user, i) {
-      if (user._id === userId) return i;
+    const userDisplayNameIndex = props.userList.user.find(function (user, i) {
+      if (user._id === userId) {
+        return i;
+      } else {
+        return null;
+      }
     });
     console.log(userDisplayNameIndex);
     console.log(props.userList.user[userDisplayNameIndex]);
