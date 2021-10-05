@@ -160,7 +160,7 @@ function JobList(props) {
                                             margin: "10px",
                                           }}>
                                           <Card.Text>
-                                            {displayUserName(userItem.Id)}
+                                            {displayUserName(userItem)}
                                           </Card.Text>
                                         </Card>
                                       </div>
