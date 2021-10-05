@@ -45,13 +45,23 @@ function JobList(props) {
       console.log(jobArray);
       const tempArray = Array.from(jobArray[droppableSplit[2]].users);
       console.log(tempArray);
-      tempArray.splice(destination.index, 0, draggableId);
-      const tempJobArray = [...jobArray];
-      console.log(tempJobArray);
-      tempJobArray[droppableSplit[2]].users = tempArray;
-      console.log(tempJobArray);
-      setJobArray(() => tempJobArray);
-      // call update function to update db that user has been allocated
+      // check if this id is already in the array for this job
+      // if it is then we stop the assignment
+      const checkDuplicate = jobArray[droppableSplit[2]].users.some(
+        (user) => user._id === draggableId
+      );
+      console.log("check dupe:" + checkDuplicate);
+      if (!checkDuplicate) {
+        tempArray.splice(destination.index, 0, draggableId);
+        const tempJobArray = [...jobArray];
+        console.log(tempJobArray);
+        tempJobArray[droppableSplit[2]].users = tempArray;
+        console.log(tempJobArray);
+        setJobArray(() => tempJobArray);
+        // call update function to update db that user has been allocated
+      } else {
+        console.log("duplicate found no action taken");
+      }
     }
     // remove from job array
     if (destination.droppableId === "AssetBox") {
