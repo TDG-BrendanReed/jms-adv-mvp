@@ -137,7 +137,7 @@ function DashboardContainer() {
       console.log("userloaded if check");
       loadUser();
     }
-  });
+  }, [userLoaded]);
 
   return (
     <>
