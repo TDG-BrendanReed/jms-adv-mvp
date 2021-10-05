@@ -151,6 +151,7 @@ function DashboardContainer() {
             </Col>
           </Row>
         </Form>
+        <br />
         <h6> Job List: </h6>
         <br />
         {shouldRenderList ? (

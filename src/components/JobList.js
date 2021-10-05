@@ -61,7 +61,7 @@ function JobList(props) {
         console.log("duplicate found no action taken");
       }
     }
-    // remove from job array
+    // remove from job array when placed back into the box
     if (destination.droppableId === "AssetBox") {
       console.log("removing");
       const droppableSplit = source.droppableId.split(":");
@@ -113,8 +113,6 @@ function JobList(props) {
                                 id={i}
                                 style={{
                                   width: "7rem",
-                                  padding: "10px",
-                                  margin: "10px",
                                 }}>
                                 <Card.Text>
                                   {userItem.userData.displayName}
@@ -149,11 +147,15 @@ function JobList(props) {
                 </thead>
                 <tbody>
                   {props.jobList.jobs.map((jobItem, i) => (
-                    <tr id={i}>
+                    <tr
+                      style={{
+                        minHeight: "80px",
+                      }}
+                      id={i}>
                       <td>{jobItem._id}</td>
                       <Droppable droppableId={"user:" + jobItem._id + ":" + i}>
                         {(provided) => (
-                          <div
+                          <td
                             ref={provided.innerRef}
                             {...provided.droppableProps}>
                             <Container
@@ -177,8 +179,6 @@ function JobList(props) {
                                             id={i}
                                             style={{
                                               width: "7rem",
-                                              padding: "10px",
-                                              margin: "10px",
                                             }}>
                                             <Card.Text>
                                               {displayUserName(userItem)}
@@ -192,7 +192,7 @@ function JobList(props) {
                               ]}
                               {provided.placeholder}
                             </Container>
-                          </div>
+                          </td>
                         )}
                       </Droppable>
                       <td>Asset Placeholder</td>
