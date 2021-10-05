@@ -20,7 +20,7 @@ function JobList(props) {
                 </tr>
               </thead>
               <tbody>
-                {props.jobList.job.map((jobItem, i) => (
+                {props.jobList.jobs.map((jobItem, i) => (
                   <tr id={i}>
                     <td>{jobItem._id}</td>
                     <td>Asset Placeholder</td>
