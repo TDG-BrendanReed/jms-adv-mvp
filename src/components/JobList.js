@@ -9,6 +9,17 @@ function JobList(props) {
   console.log(props.userList);
   console.log(jobArray);
 
+  function displayUserName(userId) {
+    userDisplayNameIndex = props.userList.user.find(function (user, i) {
+      if (user._id === userId) return i;
+    });
+    console.log(userDisplayNameIndex);
+    console.log(props.userList.user[userDisplayNameIndex]);
+    return (
+      <p>{props.userList.user[userDisplayNameIndex].userData.displayName}</p>
+    );
+  }
+
   function onDragEnd(result) {
     console.log(result);
     const { destination, source, draggableId } = result;
@@ -26,13 +37,13 @@ function JobList(props) {
 
     if (destination.droppableId !== "AssetBox") {
       const droppableSplit = destination.droppableId.split(":");
-      console.log(droppableSplit);
+      console.log(droppableSplit[2]);
       const tempArray = Array.from(jobArray[droppableSplit[2]].user);
       console.log(tempArray);
       tempArray.splice(destination.index, 0, draggableId);
       const tempJobArray = [...jobArray];
       console.log(tempJobArray);
-      tempJobArray[droppableSplit[2]].users = tempArray;
+      tempJobArray[droppableSplit[2]].user = tempArray;
       console.log(tempJobArray);
       setJobArray(() => tempJobArray);
     }
@@ -137,7 +148,9 @@ function JobList(props) {
                                             padding: "10px",
                                             margin: "10px",
                                           }}>
-                                          <Card.Text>{userItem}</Card.Text>
+                                          <Card.Text>
+                                            {displayUserName(userItem.Id)}
+                                          </Card.Text>
                                         </Card>
                                       </div>
                                     )}
