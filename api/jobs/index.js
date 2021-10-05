@@ -25,6 +25,7 @@ const jobSchema = new mongoose.Schema({
   },
   client: String,
   assets: Array,
+  users: Array,
   jobs: Array,
 });
 

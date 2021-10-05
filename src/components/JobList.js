@@ -7,7 +7,25 @@ function JobList(props) {
   console.log(props.jobList);
   console.log(props.userList);
 
-  function onDragEnd(result) {}
+  function onDragEnd(result) {
+    console.log(result);
+    const { destination, source } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    if (destination.droppableId !== "AssetBox") {
+      // const tempArray = Array.from();
+    }
+  }
 
   return (
     <>
@@ -77,12 +95,38 @@ function JobList(props) {
                   {props.jobList.jobs.map((jobItem, i) => (
                     <tr id={i}>
                       <td>{jobItem._id}</td>
-                      <Droppable droppableId="jobItem._id">
+                      <Droppable droppableId={jobItem._id} index={i}>
                         {(provided) => (
                           <div
                             ref={provided.innerRef}
                             {...provided.droppableProps}>
-                            <td>Asset Placeholder</td>
+                            {[
+                              jobItem.users.map((userItem, i) => (
+                                <div>
+                                  <Draggable
+                                    key={jobItem._id + ":" + userItem}
+                                    draggableId={jobItem._id + ":" + userItem}
+                                    index={i}>
+                                    {(provided) => (
+                                      <div
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                        ref={provided.innerRef}>
+                                        <Card
+                                          id={i}
+                                          style={{
+                                            width: "15rem",
+                                            padding: "10px",
+                                            margin: "10px",
+                                          }}>
+                                          <Card.Text>{userItem}</Card.Text>
+                                        </Card>
+                                      </div>
+                                    )}
+                                  </Draggable>
+                                </div>
+                              )),
+                            ]}
                             {provided.placeholder}
                           </div>
                         )}
