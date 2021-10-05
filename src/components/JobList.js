@@ -8,7 +8,7 @@ function JobList(props) {
   console.log(props.jobList);
   console.log(props.userList);
   console.log(jobArray);
-  setJobArray(() => props.jobList.jobs);
+  setJobArray(props.jobList.jobs);
 
   function onDragEnd(result) {
     console.log(result);
