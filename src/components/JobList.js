@@ -16,43 +16,45 @@ function JobList(props) {
           <h6>Users to Allocate:</h6>
           <Droppable droppableId="AssetBox">
             {(provided) => (
-              <Container
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                style={{
-                  minWidth: "18rem",
-                  minHeight: "100px",
-                  background: "light-grey",
-                }}>
-                {[
-                  props.userList.user.map((userItem, i) => (
-                    <div>
-                      <Draggable
-                        key={userItem._id}
-                        draggableId={userItem._id}
-                        index={i}>
-                        {(provided) => (
-                          <Card
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                            id={i}
-                            style={{
-                              width: "15rem",
-                              padding: "10px",
-                              margin: "10px",
-                            }}>
-                            <Card.Text>
-                              {userItem.userData.displayName}
-                            </Card.Text>
-                          </Card>
-                        )}
-                      </Draggable>
-                    </div>
-                  )),
-                ]}
-                {provided.placeholder}
-              </Container>
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                <Container
+                  style={{
+                    minWidth: "18rem",
+                    minHeight: "100px",
+                    background: "light-grey",
+                  }}>
+                  {[
+                    props.userList.user.map((userItem, i) => (
+                      <div>
+                        <Draggable
+                          key={userItem._id}
+                          draggableId={userItem._id}
+                          index={i}>
+                          {(provided) => (
+                            <div
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              ref={provided.innerRef}>
+                              <Card
+                                id={i}
+                                style={{
+                                  width: "15rem",
+                                  padding: "10px",
+                                  margin: "10px",
+                                }}>
+                                <Card.Text>
+                                  {userItem.userData.displayName}
+                                </Card.Text>
+                              </Card>
+                            </div>
+                          )}
+                        </Draggable>
+                      </div>
+                    )),
+                  ]}
+                  {provided.placeholder}
+                </Container>
+              </div>
             )}
           </Droppable>
         </Container>
