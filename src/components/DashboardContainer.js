@@ -30,7 +30,6 @@ function DashboardContainer() {
         // Put current user into state
         setUser(retrievedData.user[0]);
         // Update state to show the user has been loaded from DB
-        setUserLoaded(() => true);
         const tempLoadStatus = true;
         // Update the user with most current data from MS Graph
         RequestProfileData(tempLoadStatus);
@@ -133,6 +132,7 @@ function DashboardContainer() {
   useEffect(() => {
     console.log("useEffect ran" + userLoaded);
     if (!userLoaded) {
+      setUserLoaded(() => true);
       console.log("userloaded if check");
       loadUser();
     }
