@@ -63,12 +63,12 @@ module.exports = async function (context, req) {
 async function getJob(context) {
   if (context.bindingData.id !== "all") {
     console.log("does not equal all");
-    const job = await JobsModel.find({ userId: context.bindingData.id });
+    const job = await JobModel.find({ userId: context.bindingData.id });
     // return job
     context.res.body = { job: job };
   } else {
     console.log(" does equal all ");
-    const jobs = await JobsModel.find();
+    const jobs = await JobModel.find();
     // return user
     context.res.body = { jobs: jobs };
   }

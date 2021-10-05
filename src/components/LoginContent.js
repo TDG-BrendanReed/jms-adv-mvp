@@ -1,5 +1,5 @@
 import React from "react";
-import "../LoginLanding.css";
+
 import { SignInButton } from "./SignInButton";
 
 const LoginContent = (props) => (

@@ -51,6 +51,7 @@ function DashboardContainer() {
 
   const handleChange = (e) => {
     e.preventDefault();
+    console.log(e.target.name + " : " + e.target.value);
     setJobInput({ [e.target.name]: e.target.value });
   };
 
@@ -91,7 +92,7 @@ function DashboardContainer() {
     loadJob();
     const interval = setInterval(() => {
       loadJob();
-    }, 2000);
+    }, 20000);
 
     return () => clearInterval(interval);
   }, []);
