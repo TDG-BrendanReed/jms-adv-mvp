@@ -30,7 +30,7 @@ function DashboardContainer() {
         // Put current user into state
         setUser(retrievedData.user[0]);
         // Update state to show the user has been loaded from DB
-        setUserLoaded((userLoaded) => !userLoaded);
+        setUserLoaded(() => true);
         const tempLoadStatus = true;
         // Update the user with most current data from MS Graph
         RequestProfileData(tempLoadStatus);
@@ -82,6 +82,8 @@ function DashboardContainer() {
         },
       }
     );
+    // flip user status back to false to force system to collect updated information
+    setUserLoaded((userLoaded) => !userLoaded);
   }
 
   function RequestProfileData(loadStatus) {
