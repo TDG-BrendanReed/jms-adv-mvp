@@ -11,6 +11,7 @@ function JobList(props) {
 
   function displayUserName(userId) {
     const userDisplayNameIndex = props.userList.user.find(function (user, i) {
+      console.log(i + " : " + user._id);
       if (user._id === userId) {
         return i;
       } else {
@@ -19,9 +20,13 @@ function JobList(props) {
     });
     console.log(userDisplayNameIndex);
     console.log(props.userList.user[userDisplayNameIndex]);
-    return (
-      <p>{props.userList.user[userDisplayNameIndex].userData.displayName}</p>
-    );
+    if (userDisplayNameIndex) {
+      return (
+        <p>{props.userList.user[userDisplayNameIndex].userData.displayName}</p>
+      );
+    } else {
+      return null;
+    }
   }
 
   function onDragEnd(result) {
