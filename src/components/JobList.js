@@ -28,7 +28,7 @@ function JobList(props) {
                           {...provided.dragHandleProps}
                           innerRef={provided.innerRef}
                           id={i}
-                          style={{ width: "18rem" }}>
+                          style={{ width: "10rem", padding: "10px" }}>
                           <Card.Title>
                             {userItem.userData.displayName}
                           </Card.Title>
@@ -42,7 +42,7 @@ function JobList(props) {
             )}
           </Droppable>
         </Container>
-
+        <br />
         <Container>
           <Row>
             <Col>
