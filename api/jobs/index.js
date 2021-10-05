@@ -11,29 +11,27 @@ mongoose.connect(
 );
 
 // Create the schema or structure of our object in Mongoose
-const userSchema = new mongoose.Schema({
-  userId: String,
-  status: String,
-  prontoData: Object,
-  userData: {
-    businessPhones: Array,
-    givenName: String,
-    surname: String,
-    userPrincipalName: String,
-    displayName: String,
-    id: String,
-    jobTitle: String,
-    mail: String,
-    mobilePhone: String,
-    officeLocation: String,
+const jobSchema = new mongoose.Schema({
+  jobNumber: String,
+  status: {
+    // Add completed property
+    type: Boolean, // Set type to boolean
+    default: true, // Set default to false
   },
+  prontoData: Object,
+  jobData: {
+    date: String,
+    jobLocation: String,
+  },
+  client: String,
+  assets: Array,
   jobs: Array,
 });
 
 // Create a model using our schema
 // This model will be used to access the database
-const UserModel = mongoose.model("user", userSchema);
-console.log(UserModel);
+const JobModel = mongoose.model("job", jobSchema);
+console.log(JobModel);
 
 // Export our function
 module.exports = async function (context, req) {
@@ -48,51 +46,54 @@ module.exports = async function (context, req) {
   switch (req.method) {
     // If get, return all tasks
     case "GET":
-      await getUser(context);
+      await getJob(context);
       break;
     // If post, create new task
     case "POST":
-      await createUser(context);
+      await createJob(context);
       break;
     // If put, update task
     case "PUT":
-      await updateUser(context);
+      await updateJob(context);
       break;
   }
 };
 
-// Return user with supplied UID
-async function getUser(context) {
+// Return jobs
+async function getJob(context) {
   console.log(context);
-  // load user found from database
-  const user = await UserModel.find({ userId: context.bindingData.id });
-  // return user
-  context.res.body = { user: user };
+  // load job found from database
+  const jobs = await JobModel.find();
+  // return job
+  context.res.body = { jobs: jobs };
 }
 
-// Create new User
-async function createUser(context) {
-  // Read the uploaded user
+// Create new Job
+async function createJob(context) {
+  // Read the uploaded job
   const body = context.req.body;
   // Save to database
-  const user = await UserModel.create(body);
+  const job = await JobModel.create(body);
   // Set the HTTP status to created
   context.res.status = 201;
   // return new object
-  context.res.body = user;
+  context.res.body = job;
 }
 
 // Update an existing function
-async function updateUser(context) {
+async function updateJob(context) {
   // Grab the id from the URL (stored in bindingData)
   const id = context.bindingData.id;
   // Get the task from the body
-  const user = context.req.body;
+  const job = context.req.body;
   // Update the item in the database
-  const result = await UserModel.updateOne({ userId: id }, user);
+  const result = await JobModel.updateOne({ jobId: id }, job);
   // Check to ensure an item was modified
   if (result.nModified === 1) {
     // Updated an item, status 204 (empty update)
     context.res.status = 204;
+  } else {
+    // Item not found, status 404
+    context.res.status = 404;
   }
 }

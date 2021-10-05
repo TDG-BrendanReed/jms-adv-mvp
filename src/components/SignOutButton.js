@@ -19,7 +19,7 @@ export const SignOutButton = () => {
       variant="secondary"
       className="ml-auto"
       onClick={() => handleLogout(instance)}>
-      Sign out using Redirect
+      Sign out
     </Button>
   );
 };

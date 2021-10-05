@@ -11,20 +11,16 @@ mongoose.connect(
 );
 
 // Create the schema or structure of our object in Mongoose
-const userSchema = new mongoose.Schema({
-  userId: String,
-  status: String,
+const clientSchema = new mongoose.Schema({
+  clientName: String,
+  status: {
+    // Add completed property
+    type: Boolean, // Set type to boolean
+    default: true, // Set default to false
+  },
   prontoData: Object,
-  userData: {
-    businessPhones: Array,
-    givenName: String,
-    surname: String,
-    userPrincipalName: String,
-    displayName: String,
-    id: String,
-    jobTitle: String,
-    mail: String,
-    mobilePhone: String,
+  clientData: {
+    type: String,
     officeLocation: String,
   },
   jobs: Array,
@@ -32,8 +28,8 @@ const userSchema = new mongoose.Schema({
 
 // Create a model using our schema
 // This model will be used to access the database
-const UserModel = mongoose.model("user", userSchema);
-console.log(UserModel);
+const ClientModel = mongoose.model("client", clientSchema);
+console.log(ClientModel);
 
 // Export our function
 module.exports = async function (context, req) {
@@ -48,51 +44,54 @@ module.exports = async function (context, req) {
   switch (req.method) {
     // If get, return all tasks
     case "GET":
-      await getUser(context);
+      await getClient(context);
       break;
     // If post, create new task
     case "POST":
-      await createUser(context);
+      await createClient(context);
       break;
     // If put, update task
     case "PUT":
-      await updateUser(context);
+      await updateClient(context);
       break;
   }
 };
 
-// Return user with supplied UID
-async function getUser(context) {
+// Return clients
+async function getClient(context) {
   console.log(context);
-  // load user found from database
-  const user = await UserModel.find({ userId: context.bindingData.id });
-  // return user
-  context.res.body = { user: user };
+  // load client found from database
+  const clients = await ClientModel.find();
+  // return client
+  context.res.body = { clients: clients };
 }
 
-// Create new User
-async function createUser(context) {
-  // Read the uploaded user
+// Create new Client
+async function createClient(context) {
+  // Read the uploaded client
   const body = context.req.body;
   // Save to database
-  const user = await UserModel.create(body);
+  const client = await ClientModel.create(body);
   // Set the HTTP status to created
   context.res.status = 201;
   // return new object
-  context.res.body = user;
+  context.res.body = client;
 }
 
 // Update an existing function
-async function updateUser(context) {
+async function updateClient(context) {
   // Grab the id from the URL (stored in bindingData)
   const id = context.bindingData.id;
   // Get the task from the body
-  const user = context.req.body;
+  const client = context.req.body;
   // Update the item in the database
-  const result = await UserModel.updateOne({ userId: id }, user);
+  const result = await ClientModel.updateOne({ clientId: id }, client);
   // Check to ensure an item was modified
   if (result.nModified === 1) {
     // Updated an item, status 204 (empty update)
     context.res.status = 204;
+  } else {
+    // Item not found, status 404
+    context.res.status = 404;
   }
 }

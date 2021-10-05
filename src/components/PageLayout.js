@@ -13,7 +13,7 @@ export const PageLayout = (props) => {
       <Navbar bg="light">
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand> MVP </Navbar.Brand>
+            <Navbar.Brand> React Viability Demo </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -21,22 +21,22 @@ export const PageLayout = (props) => {
               <LinkContainer to="/">
                 <Nav.Link>Home</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/Users">
-                <Nav.Link>Link</Nav.Link>
+              <LinkContainer to="/JobView">
+                <Nav.Link>Job List</Nav.Link>
               </LinkContainer>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <LinkContainer to="/Assets">
                   <NavDropdown.Item>Assets</NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to="/Orders">
-                  <NavDropdown.Item>Another action</NavDropdown.Item>
+                <LinkContainer to="/Clients">
+                  <NavDropdown.Item>Clients</NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to="/Orders">
-                  <NavDropdown.Item>Something</NavDropdown.Item>
+                <LinkContainer to="/Users">
+                  <NavDropdown.Item>Users</NavDropdown.Item>
                 </LinkContainer>
                 <NavDropdown.Divider />
-                <LinkContainer to="/Orders">
-                  <NavDropdown.Item>Separated link</NavDropdown.Item>
+                <LinkContainer to="/Profile">
+                  <NavDropdown.Item>My Profile</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
             </Nav>

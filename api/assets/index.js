@@ -11,20 +11,16 @@ mongoose.connect(
 );
 
 // Create the schema or structure of our object in Mongoose
-const userSchema = new mongoose.Schema({
-  userId: String,
-  status: String,
+const assetSchema = new mongoose.Schema({
+  AssetName: String,
+  status: {
+    // Add completed property
+    type: Boolean, // Set type to boolean
+    default: true, // Set default to false
+  },
   prontoData: Object,
-  userData: {
-    businessPhones: Array,
-    givenName: String,
-    surname: String,
-    userPrincipalName: String,
-    displayName: String,
-    id: String,
-    jobTitle: String,
-    mail: String,
-    mobilePhone: String,
+  assetData: {
+    registration: String,
     officeLocation: String,
   },
   jobs: Array,
@@ -32,8 +28,8 @@ const userSchema = new mongoose.Schema({
 
 // Create a model using our schema
 // This model will be used to access the database
-const UserModel = mongoose.model("user", userSchema);
-console.log(UserModel);
+const AssetModel = mongoose.model("asset", assetSchema);
+console.log(AssetModel);
 
 // Export our function
 module.exports = async function (context, req) {
@@ -48,51 +44,54 @@ module.exports = async function (context, req) {
   switch (req.method) {
     // If get, return all tasks
     case "GET":
-      await getUser(context);
+      await getAsset(context);
       break;
     // If post, create new task
     case "POST":
-      await createUser(context);
+      await createAsset(context);
       break;
     // If put, update task
     case "PUT":
-      await updateUser(context);
+      await updateAsset(context);
       break;
   }
 };
 
-// Return user with supplied UID
-async function getUser(context) {
+// Return assets
+async function getAsset(context) {
   console.log(context);
-  // load user found from database
-  const user = await UserModel.find({ userId: context.bindingData.id });
-  // return user
-  context.res.body = { user: user };
+  // load asset found from database
+  const assets = await AssetModel.find();
+  // return asset
+  context.res.body = { assets: assets };
 }
 
-// Create new User
-async function createUser(context) {
-  // Read the uploaded user
+// Create new Asset
+async function createAsset(context) {
+  // Read the uploaded asset
   const body = context.req.body;
   // Save to database
-  const user = await UserModel.create(body);
+  const asset = await AssetModel.create(body);
   // Set the HTTP status to created
   context.res.status = 201;
   // return new object
-  context.res.body = user;
+  context.res.body = asset;
 }
 
 // Update an existing function
-async function updateUser(context) {
+async function updateAsset(context) {
   // Grab the id from the URL (stored in bindingData)
   const id = context.bindingData.id;
   // Get the task from the body
-  const user = context.req.body;
+  const asset = context.req.body;
   // Update the item in the database
-  const result = await UserModel.updateOne({ userId: id }, user);
+  const result = await AssetModel.updateOne({ _id: id }, asset);
   // Check to ensure an item was modified
   if (result.nModified === 1) {
     // Updated an item, status 204 (empty update)
     context.res.status = 204;
+  } else {
+    // Item not found, status 404
+    context.res.status = 404;
   }
 }

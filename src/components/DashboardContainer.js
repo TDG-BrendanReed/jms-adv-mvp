@@ -6,6 +6,7 @@ import { callMsGraph } from "../graph";
 import { loginRequest } from "../authConfig";
 import ProfileData from "./ProfileData";
 import { Switch, Route } from "react-router-dom";
+import Users from "../pages/Users";
 
 function DashboardContainer() {
   const { instance, accounts } = useMsal();
@@ -82,7 +83,7 @@ function DashboardContainer() {
     const response = await fetch(
       url, // API location
       {
-        method: "PUT", // POST to create new item
+        method: "PUT", // PUT to update item
         body: JSON.stringify(requestBody), // Add task to body
         headers: {
           "Content-Type": "application/json", // Set return type to JSON
@@ -91,9 +92,6 @@ function DashboardContainer() {
     );
     console.log("PUT Response: ");
     console.log(response);
-    // if (!userLoaded) {
-    //   loadUser();
-    // }
   }
 
   function RequestProfileData(loadStatus) {
@@ -164,16 +162,23 @@ function DashboardContainer() {
       {user ? (
         <>
           <Switch>
+            <Route path="/JobView">
+              <ProfileData user={user} />
+            </Route>
             <Route path="/Users">
+              <Users />
+            </Route>
+            <Route path="/Assets">
+              <ProfileData user={user} />
+              <ProfileData user={user} />
               <ProfileData user={user} />
             </Route>
-            <Route path="/Orders">
+            <Route path="/Clients">
+              <ProfileData user={user} />
               <ProfileData user={user} />
               <ProfileData user={user} />
             </Route>
-            <Route path="/">
-              <ProfileData user={user} />
-              <ProfileData user={user} />
+            <Route path="/Profile">
               <ProfileData user={user} />
             </Route>
           </Switch>
@@ -182,8 +187,8 @@ function DashboardContainer() {
         <center>
           <Spinner variant="primary" animation="grow" role="status">
             <span className="visually-hidden">Loading...</span>
-            <h2>Loading...</h2>
           </Spinner>
+          <h2>Loading...</h2>
         </center>
       )}
     </>
