@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Table } from "react-bootstrap";
+import { Container, Table, Row, Col } from "react-bootstrap";
 
 function UserList(props) {
   console.log(props);

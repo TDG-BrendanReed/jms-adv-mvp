@@ -12,7 +12,6 @@ function DashboardContainer() {
   const { instance, accounts } = useMsal();
   const [user, setUser] = useState(null);
   const [userLoaded, setUserLoaded] = useState(false);
-  const name = accounts[0] && accounts[0].name;
   const tempId = accounts[0] && accounts[0].localAccountId;
 
   async function loadUser() {
@@ -158,7 +157,6 @@ function DashboardContainer() {
   console.log(user);
   return (
     <>
-      <h5 className="card-title">Welcome {name}</h5>
       {user ? (
         <>
           <Switch>
