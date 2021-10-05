@@ -66,11 +66,14 @@ function DashboardContainer() {
       }
     );
     console.log("before" + userLoaded);
-    setUserLoaded(false);
+    setUserLoaded((userLoaded) => !userLoaded);
     console.log("after " + userLoaded);
+    console.log("before2" + userLoaded);
+    setUserLoaded((userLoaded) => !userLoaded);
+    console.log("after2" + userLoaded);
     console.log("Response: ");
     console.log(response);
-    this.forceUpdate();
+    // this.forceUpdate();
   }
 
   async function updateUser(data) {
