@@ -59,7 +59,7 @@ function DashboardContainer() {
     <>
       <h5 className="card-title">Users</h5>
       {users ? (
-        <UserList users={users} />
+        <UserList userList={users} />
       ) : (
         <center>
           <Spinner variant="primary" animation="grow" role="status">
