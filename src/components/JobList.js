@@ -86,9 +86,8 @@ function JobList(props) {
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 <Container
                   style={{
-                    minWidth: "18rem",
-                    minHeight: "100px",
-                    background: "light-grey",
+                    minWidth: "10rem",
+                    maxWidth: "10rem",
                   }}>
                   {[
                     props.userList.user.map((userItem, i) => (
@@ -105,7 +104,7 @@ function JobList(props) {
                               <Card
                                 id={i}
                                 style={{
-                                  width: "15rem",
+                                  width: "7rem",
                                   padding: "10px",
                                   margin: "10px",
                                 }}>
@@ -134,8 +133,8 @@ function JobList(props) {
                 <thead>
                   <tr>
                     <th>ID#</th>
-                    <th>Assets</th>
                     <th>Users</th>
+                    <th>Assets</th>
                     <th>Job Number</th>
                     <th>Job Status</th>
                   </tr>
@@ -149,40 +148,46 @@ function JobList(props) {
                           <div
                             ref={provided.innerRef}
                             {...provided.droppableProps}>
-                            {[
-                              jobItem.users.map((userItem, i) => (
-                                <div>
-                                  <Draggable
-                                    key={jobItem._id + ":" + userItem}
-                                    draggableId={jobItem._id + ":" + userItem}
-                                    index={i}>
-                                    {(provided) => (
-                                      <div
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        ref={provided.innerRef}>
-                                        <Card
-                                          id={i}
-                                          style={{
-                                            width: "15rem",
-                                            padding: "10px",
-                                            margin: "10px",
-                                          }}>
-                                          <Card.Text>
-                                            {displayUserName(userItem)}
-                                          </Card.Text>
-                                        </Card>
-                                      </div>
-                                    )}
-                                  </Draggable>
-                                </div>
-                              )),
-                            ]}
-                            {provided.placeholder}
+                            <Container
+                              style={{
+                                minWidth: "10rem",
+                                maxWidth: "10rem",
+                              }}>
+                              {[
+                                jobItem.users.map((userItem, i) => (
+                                  <div>
+                                    <Draggable
+                                      key={jobItem._id + ":" + userItem}
+                                      draggableId={jobItem._id + ":" + userItem}
+                                      index={i}>
+                                      {(provided) => (
+                                        <div
+                                          {...provided.draggableProps}
+                                          {...provided.dragHandleProps}
+                                          ref={provided.innerRef}>
+                                          <Card
+                                            id={i}
+                                            style={{
+                                              width: "7rem",
+                                              padding: "10px",
+                                              margin: "10px",
+                                            }}>
+                                            <Card.Text>
+                                              {displayUserName(userItem)}
+                                            </Card.Text>
+                                          </Card>
+                                        </div>
+                                      )}
+                                    </Draggable>
+                                  </div>
+                                )),
+                              ]}
+                              {provided.placeholder}
+                            </Container>
                           </div>
                         )}
                       </Droppable>
-                      <td>User Placeholder</td>
+                      <td>Asset Placeholder</td>
                       <td>Job #: {jobItem.jobNumber}</td>
                       <td>
                         {jobItem.status ? <p>Active</p> : <p>Archived</p>}

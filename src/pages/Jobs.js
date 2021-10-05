@@ -68,8 +68,14 @@ function DashboardContainer() {
 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log(e.target.name + " : " + e.target.value);
-    setJobInput({ [e.target.name]: e.target.value });
+    console.log(e.target.name + " : " + e.target.value.toString());
+    if (e.target.name === "status") {
+      // we want boolean for this
+      setJobInput({ [e.target.name]: e.target.value });
+    } else {
+      // we want strings for this
+      setJobInput({ [e.target.name]: e.target.value.toString() });
+    }
   };
 
   const handleSubmit = (e) => {
