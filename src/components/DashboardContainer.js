@@ -65,7 +65,9 @@ function DashboardContainer() {
         },
       }
     );
-    setUserLoaded(false);
+    console.log("before" + userLoaded);
+    setUserLoaded((userLoaded) => !userLoaded);
+    console.log("after " + userLoaded);
     console.log("Response: ");
     console.log(response);
   }
