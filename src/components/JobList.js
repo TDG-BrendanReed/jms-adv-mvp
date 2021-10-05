@@ -50,12 +50,13 @@ function JobList(props) {
     if (destination.droppableId !== "AssetBox") {
       const droppableSplit = destination.droppableId.split(":");
       console.log(droppableSplit[2]);
-      const tempArray = Array.from(jobArray[droppableSplit[2]].user);
+      console.log(jobArray);
+      const tempArray = Array.from(jobArray[droppableSplit[2]].users);
       console.log(tempArray);
       tempArray.splice(destination.index, 0, draggableId);
       const tempJobArray = [...jobArray];
       console.log(tempJobArray);
-      tempJobArray[droppableSplit[2]].user = tempArray;
+      tempJobArray[droppableSplit[2]].users = tempArray;
       console.log(tempJobArray);
       setJobArray(() => tempJobArray);
     }
@@ -64,7 +65,6 @@ function JobList(props) {
   useEffect(() => {
     setJobArray(props.jobList.jobs);
     console.log("use effect ran");
-    console.log("testing gh actions");
   }, [props.jobList.jobs]);
 
   return (
