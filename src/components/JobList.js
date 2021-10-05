@@ -18,13 +18,18 @@ function JobList(props) {
             {(provided) => (
               <Container
                 innerRef={provided.innerRef}
-                {...provided.droppableProps}>
+                {...provided.droppableProps}
+                style={{ minWidth: "18rem", minHeight: "300px" }}>
                 {[
                   props.userList.user.map((userItem, i) => (
-                    <Draggable draggableId={userItem._id} index={i}>
+                    <Draggable
+                      key={userItem._id}
+                      draggableId={userItem._id}
+                      index={i}>
                       {(provided) => (
                         <Card
                           {...provided.draggableProps}
+                          {...provided.dragHandleProps}
                           innerRef={provided.innerRef}
                           id={i}
                           style={{
@@ -32,9 +37,7 @@ function JobList(props) {
                             padding: "10px",
                             margin: "10px",
                           }}>
-                          <Card.Title {...provided.dragHandleProps}>
-                            {userItem.userData.displayName}
-                          </Card.Title>
+                          <Card.Text>{userItem.userData.displayName}</Card.Text>
                         </Card>
                       )}
                     </Draggable>
