@@ -65,7 +65,7 @@ module.exports = async function (context, req) {
 async function getUser(context) {
   console.log(context);
   // load user found from database
-  if (context.bindingData.id) {
+  if (context.bindingData.id !== "all") {
     const user = await UserModel.find({ userId: context.bindingData.id });
   } else {
     const user = await UserModel.find();
