@@ -12,9 +12,12 @@ function JobList(props) {
   function displayUserName(userId) {
     const userDisplayNameIndex = props.userList.user.find(function (user, i) {
       console.log(i + " : " + user._id);
+      console.log(userId);
       if (user._id === userId) {
+        console.log("true");
         return i;
       } else {
+        console.log("false");
         return null;
       }
     });
@@ -132,8 +135,7 @@ function JobList(props) {
                   {props.jobList.jobs.map((jobItem, i) => (
                     <tr id={i}>
                       <td>{jobItem._id}</td>
-                      <Droppable
-                        droppableId={"user:" + jobItem._id + ":" + { i }}>
+                      <Droppable droppableId={"user:" + jobItem._id + ":" + i}>
                         {(provided) => (
                           <div
                             ref={provided.innerRef}
