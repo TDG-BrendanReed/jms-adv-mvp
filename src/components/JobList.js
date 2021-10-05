@@ -41,6 +41,7 @@ function JobList(props) {
   useEffect(() => {
     setJobArray(props.jobList.jobs);
     console.log("use effect ran");
+    console.log("testing gh actions");
   }, [props.jobList.jobs]);
 
   return (
