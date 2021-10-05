@@ -81,7 +81,6 @@ function DashboardContainer() {
       }
     );
     // flip user status back to false to force system to collect updated information
-    setUserLoaded(() => false);
   }
 
   function RequestProfileData(loadStatus) {
