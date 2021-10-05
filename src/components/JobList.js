@@ -24,7 +24,7 @@ function JobList(props) {
     console.log(userDisplayNameIndex);
 
     if (userDisplayNameIndex) {
-      return <p>{userDisplayNameIndex.userData.displayName}</p>;
+      return userDisplayNameIndex.userData.displayName;
     } else {
       return null;
     }
