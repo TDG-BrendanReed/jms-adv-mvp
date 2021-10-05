@@ -91,7 +91,7 @@ function DashboardContainer() {
     loadJob();
     const interval = setInterval(() => {
       loadJob();
-    }, 20000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
@@ -112,7 +112,10 @@ function DashboardContainer() {
               />
             </Col>
             <Col>
-              <Form.Check onChange={handleChange} name="status" />
+              <Form.Select onChange={handleChange} name="status">
+                <option value={true}>Active</option>
+                <option value={false}>Archived</option>
+              </Form.Select>
             </Col>
             <Col>
               <Button onClick={handleSubmit}>Submit Job</Button>
