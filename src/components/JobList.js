@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Container, Table, Row, Col, Card } from "react-bootstrap";
 
 function JobList(props) {
+  const [jobArray, setJobArray] = useState(null);
   console.log(props);
   console.log(props.jobList);
   console.log(props.userList);
+  console.log(jobArray);
+  setJobArray(() => props.jobList.jobs);
 
   function onDragEnd(result) {
     console.log(result);
-    const { destination, source } = result;
+    const { destination, source, draggableId } = result;
 
     if (!destination) {
       return;
@@ -23,7 +26,16 @@ function JobList(props) {
     }
 
     if (destination.droppableId !== "AssetBox") {
-      // const tempArray = Array.from();
+      const droppableSplit = destination.droppableId(":");
+      console.log(droppableSplit);
+      const tempArray = Array.from(jobArray[droppableSplit[2]].users);
+      console.log(tempArray);
+      tempArray.splice(destination.index, 0, draggableId);
+      const tempJobArray = [...jobArray];
+      console.log(tempJobArray);
+      tempJobArray[droppableSplit[2]].users = tempArray;
+      console.log(tempJobArray);
+      setJobArray(() => tempJobArray);
     }
   }
 
@@ -95,7 +107,8 @@ function JobList(props) {
                   {props.jobList.jobs.map((jobItem, i) => (
                     <tr id={i}>
                       <td>{jobItem._id}</td>
-                      <Droppable droppableId={jobItem._id} index={i}>
+                      <Droppable
+                        droppableId={"user:" + jobItem._id + ":" + { i }}>
                         {(provided) => (
                           <div
                             ref={provided.innerRef}
