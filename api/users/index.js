@@ -64,14 +64,19 @@ module.exports = async function (context, req) {
 // Return user with supplied UID
 async function getUser(context) {
   console.log(context);
+  console.log(context.bindingData.id);
   // load user found from database
   if (context.bindingData.id !== "all") {
+    console.log("does not equal all");
     const user = await UserModel.find({ userId: context.bindingData.id });
+    // return user
+    context.res.body = { user: user };
   } else {
+    console.log(" does equal all ");
     const user = await UserModel.find();
+    // return user
+    context.res.body = { user: user };
   }
-  // return user
-  context.res.body = { user: user };
 }
 
 // Create new User
