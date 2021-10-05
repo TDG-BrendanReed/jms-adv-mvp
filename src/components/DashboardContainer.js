@@ -12,31 +12,25 @@ function DashboardContainer() {
   const { instance, accounts } = useMsal();
   const [user, setUser] = useState(null);
   const [userLoaded, setUserLoaded] = useState(false);
+  //ID to collect user from database matching authenticated user
   const tempId = accounts[0] && accounts[0].localAccountId;
 
   async function loadUser() {
-    console.log(tempId);
     const url = "/api/users/" + tempId;
     try {
       // Uses fetch to call server
       const response = await fetch(url);
-      console.log(response);
 
       const retrievedData = await response.json();
 
-      console.log("retrieve user");
-      console.log(retrievedData);
-      console.log(retrievedData.user.length);
       if (retrievedData.user.length < 1) {
-        console.log("requesting profile data flow");
         const tempLoadStatus = false;
         RequestProfileData(tempLoadStatus);
       } else {
-        console.log("array length is 1");
         // Put current user into state
         setUser(retrievedData.user[0]);
         // Update state to show the user has been loaded from DB
-        setUserLoaded(true);
+        setUserLoaded((userLoaded) => !userLoaded);
         const tempLoadStatus = true;
         // Update the user with most current data from MS Graph
         RequestProfileData(tempLoadStatus);
@@ -49,13 +43,13 @@ function DashboardContainer() {
   }
 
   async function postUser(data) {
-    console.log("made it into function");
-    console.log(data);
     const requestBody = {
       userId: tempId,
       userData: data,
     };
-    const response = await fetch(
+    // const response =
+    // if we want to do something with the response such as verify success
+    await fetch(
       "/api/users", // API location
       {
         method: "POST", // POST to create new item
@@ -65,27 +59,20 @@ function DashboardContainer() {
         },
       }
     );
-    console.log("before" + userLoaded);
     setUserLoaded((userLoaded) => !userLoaded);
-    console.log("after " + userLoaded);
-    console.log("before2" + userLoaded);
     setUserLoaded((userLoaded) => !userLoaded);
-    console.log("after2" + userLoaded);
-    console.log("Response: ");
-    console.log(response);
-    // this.forceUpdate();
   }
 
   async function updateUser(data) {
-    console.log("made it into update function");
-    console.log(data);
     const requestBody = {
       userData: data,
       status: "Test",
     };
     const url = "/api/users/" + tempId;
-    console.log("update URL" + url);
-    const response = await fetch(
+
+    // const response =
+    // if we want to do something with the response such as verify success
+    await fetch(
       url, // API location
       {
         method: "PUT", // PUT to update item
@@ -95,8 +82,6 @@ function DashboardContainer() {
         },
       }
     );
-    console.log("PUT Response: ");
-    console.log(response);
   }
 
   function RequestProfileData(loadStatus) {
@@ -104,26 +89,21 @@ function DashboardContainer() {
       ...loginRequest,
       account: accounts[0],
     };
-    console.log(loadStatus);
+
     if (!loadStatus) {
       // Silently acquires an access token which is then attached to a request for Microsoft Graph data
       instance
         .acquireTokenSilent(request)
         .then((response) => {
           callMsGraph(response.accessToken).then((response) => {
-            console.log(response);
-            console.log("posting user");
             postUser(response);
           });
         })
         .catch((e) => {
           // If silent method fails then try popup method
-          console.log(e);
+
           instance.acquireTokenPopup(request).then((response) => {
             callMsGraph(response.accessToken).then((response) => {
-              console.log(response);
-
-              console.log("posting user from catch");
               postUser(response);
             });
           });
@@ -134,19 +114,14 @@ function DashboardContainer() {
         .acquireTokenSilent(request)
         .then((response) => {
           callMsGraph(response.accessToken).then((response) => {
-            console.log(response);
-            console.log("updating user");
             updateUser(response);
           });
         })
         .catch((e) => {
           // If silent method fails then try popup method
-          console.log(e);
+
           instance.acquireTokenPopup(request).then((response) => {
             callMsGraph(response.accessToken).then((response) => {
-              console.log(response);
-
-              console.log("updating user from catch");
               updateUser(response);
             });
           });
@@ -162,7 +137,6 @@ function DashboardContainer() {
     }
   });
 
-  console.log(user);
   return (
     <>
       {user ? (
