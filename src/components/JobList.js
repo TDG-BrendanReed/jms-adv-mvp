@@ -17,30 +17,38 @@ function JobList(props) {
           <Droppable droppableId="AssetBox">
             {(provided) => (
               <Container
-                innerRef={provided.innerRef}
+                ref={provided.innerRef}
                 {...provided.droppableProps}
-                style={{ minWidth: "18rem", minHeight: "300px" }}>
+                style={{
+                  minWidth: "18rem",
+                  minHeight: "100px",
+                  background: "light-grey",
+                }}>
                 {[
                   props.userList.user.map((userItem, i) => (
-                    <Draggable
-                      key={userItem._id}
-                      draggableId={userItem._id}
-                      index={i}>
-                      {(provided) => (
-                        <Card
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          innerRef={provided.innerRef}
-                          id={i}
-                          style={{
-                            width: "15rem",
-                            padding: "10px",
-                            margin: "10px",
-                          }}>
-                          <Card.Text>{userItem.userData.displayName}</Card.Text>
-                        </Card>
-                      )}
-                    </Draggable>
+                    <div>
+                      <Draggable
+                        key={userItem._id}
+                        draggableId={userItem._id}
+                        index={i}>
+                        {(provided) => (
+                          <Card
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                            id={i}
+                            style={{
+                              width: "15rem",
+                              padding: "10px",
+                              margin: "10px",
+                            }}>
+                            <Card.Text>
+                              {userItem.userData.displayName}
+                            </Card.Text>
+                          </Card>
+                        )}
+                      </Draggable>
+                    </div>
                   )),
                 ]}
                 {provided.placeholder}
