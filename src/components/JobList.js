@@ -58,36 +58,48 @@ function JobList(props) {
             )}
           </Droppable>
         </Container>
-      </DragDropContext>
-      <br />
-      <Container>
-        <Row>
-          <Col>
-            <Table striped bordered hover size="sm">
-              <thead>
-                <tr>
-                  <th>ID#</th>
-                  <th>Assets</th>
-                  <th>Users</th>
-                  <th>Job Number</th>
-                  <th>Job Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {props.jobList.jobs.map((jobItem, i) => (
-                  <tr id={i}>
-                    <td>{jobItem._id}</td>
-                    <td>Asset Placeholder</td>
-                    <td>User Placeholder</td>
-                    <td>Job #: {jobItem.jobNumber}</td>
-                    <td>{jobItem.status ? <p>Active</p> : <p>Archived</p>}</td>
+
+        <br />
+        <Container>
+          <Row>
+            <Col>
+              <Table striped bordered hover size="sm">
+                <thead>
+                  <tr>
+                    <th>ID#</th>
+                    <th>Assets</th>
+                    <th>Users</th>
+                    <th>Job Number</th>
+                    <th>Job Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
-          </Col>
-        </Row>
-      </Container>
+                </thead>
+                <tbody>
+                  {props.jobList.jobs.map((jobItem, i) => (
+                    <tr id={i}>
+                      <td>{jobItem._id}</td>
+                      <Droppable droppableId="jobItem._id">
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}>
+                            <td>Asset Placeholder</td>
+                            {provided.placeholder}
+                          </div>
+                        )}
+                      </Droppable>
+                      <td>User Placeholder</td>
+                      <td>Job #: {jobItem.jobNumber}</td>
+                      <td>
+                        {jobItem.status ? <p>Active</p> : <p>Archived</p>}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
+        </Container>
+      </DragDropContext>
     </>
   );
 }
