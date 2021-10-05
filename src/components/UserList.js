@@ -2,7 +2,8 @@ import React from "react";
 import { Table } from "react-bootstrap";
 
 function UserList(users) {
-  console.log(users.user);
+  console.log(users);
+  console.log(users.user[0]);
   return (
     <>
       <Table striped bordered hover size="sm">
@@ -15,7 +16,7 @@ function UserList(users) {
           </tr>
         </thead>
         <tbody>
-          {users.user.map((userItem, i) => (
+          {users.map((userItem, i) => (
             <tr id={i}>
               <td>{userItem._id}</td>
               <td>{userItem.givenName}</td>
