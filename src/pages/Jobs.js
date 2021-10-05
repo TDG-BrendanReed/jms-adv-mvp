@@ -25,7 +25,6 @@ function DashboardContainer() {
 
       console.log("retrieve job");
       console.log(retrievedData);
-      console.log(retrievedData.job.length);
       setJobs(retrievedData);
     } catch (error) {
       // If there is an error, display a generic message on the page
@@ -113,14 +112,15 @@ function DashboardContainer() {
               />
             </Col>
             <Col>
-              <Form.Check name="status" />
+              <Form.Check onChange={handleChange} name="status" />
             </Col>
             <Col>
-              <Button onClick={handleSubmit} />
+              <Button onClick={handleSubmit}>Submit Job</Button>
             </Col>
           </Row>
         </Form>
-
+        <h6> Job List: </h6>
+        <br />
         {jobs ? (
           <JobList jobList={jobs} />
         ) : (
