@@ -40,6 +40,7 @@ function JobList(props) {
 
   useEffect(() => {
     setJobArray(props.jobList.jobs);
+    console.log("use effect ran");
   }, [props.jobList.jobs]);
 
   return (
