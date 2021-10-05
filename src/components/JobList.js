@@ -27,7 +27,7 @@ function JobList(props) {
     if (destination.droppableId !== "AssetBox") {
       const droppableSplit = destination.droppableId.split(":");
       console.log(droppableSplit);
-      const tempArray = Array.from(jobArray[droppableSplit[2]].users);
+      const tempArray = Array.from(jobArray[droppableSplit[2]].user);
       console.log(tempArray);
       tempArray.splice(destination.index, 0, draggableId);
       const tempJobArray = [...jobArray];
