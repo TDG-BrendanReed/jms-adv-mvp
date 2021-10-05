@@ -54,7 +54,7 @@ function DashboardContainer() {
     loadUser();
     const interval = setInterval(() => {
       loadUser();
-    }, 10000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);

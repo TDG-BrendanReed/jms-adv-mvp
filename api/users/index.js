@@ -63,8 +63,6 @@ module.exports = async function (context, req) {
 
 // Return user with supplied UID
 async function getUser(context) {
-  console.log(context);
-  console.log(context.bindingData.id);
   // load user found from database
   if (context.bindingData.id !== "all") {
     console.log("does not equal all");

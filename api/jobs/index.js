@@ -61,11 +61,17 @@ module.exports = async function (context, req) {
 
 // Return jobs
 async function getJob(context) {
-  console.log(context);
-  // load job found from database
-  const jobs = await JobModel.find();
-  // return job
-  context.res.body = { jobs: jobs };
+  if (context.bindingData.id !== "all") {
+    console.log("does not equal all");
+    const job = await JobsModel.find({ userId: context.bindingData.id });
+    // return job
+    context.res.body = { job: job };
+  } else {
+    console.log(" does equal all ");
+    const jobs = await JobsModel.find();
+    // return user
+    context.res.body = { jobs: jobs };
+  }
 }
 
 // Create new Job

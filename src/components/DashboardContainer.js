@@ -7,6 +7,7 @@ import { loginRequest } from "../authConfig";
 import ProfileData from "./ProfileData";
 import { Switch, Route } from "react-router-dom";
 import Users from "../pages/Users";
+import Jobs from "../pages/Jobs";
 
 function DashboardContainer() {
   const { instance, accounts } = useMsal();
@@ -143,7 +144,7 @@ function DashboardContainer() {
         <>
           <Switch>
             <Route path="/JobView">
-              <ProfileData user={user} />
+              <Jobs />
             </Route>
             <Route path="/Users">
               <Users />
