@@ -39,6 +39,7 @@ function JobList(props) {
     }
 
     if (destination.droppableId !== "AssetBox") {
+      console.log("adding");
       const droppableSplit = destination.droppableId.split(":");
       console.log(droppableSplit[2]);
       console.log(jobArray);
@@ -50,6 +51,23 @@ function JobList(props) {
       tempJobArray[droppableSplit[2]].users = tempArray;
       console.log(tempJobArray);
       setJobArray(() => tempJobArray);
+      // call update function to update db that user has been allocated
+    }
+    // remove from job array
+    if (destination.droppableId === "AssetBox") {
+      console.log("removing");
+      const droppableSplit = source.droppableId.split(":");
+      console.log(droppableSplit[2]);
+      console.log(jobArray);
+      const tempArray = Array.from(jobArray[droppableSplit[2]].users);
+      console.log(tempArray);
+      tempArray.splice(source.index, 1);
+      const tempJobArray = [...jobArray];
+      console.log(tempJobArray);
+      tempJobArray[droppableSplit[2]].users = tempArray;
+      console.log(tempJobArray);
+      setJobArray(() => tempJobArray);
+      // call update function to update db with removed user
     }
   }
 
