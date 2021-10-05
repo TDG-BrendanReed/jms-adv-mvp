@@ -14,7 +14,7 @@ function UserList(users) {
           </tr>
         </thead>
         <tbody>
-          {users.map((user, i) => (
+          {users.user.map((user, i) => (
             <tr id={i}>
               <td>{user._id}</td>
               <td>{user.givenName}</td>
