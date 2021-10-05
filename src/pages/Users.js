@@ -10,7 +10,7 @@ function DashboardContainer() {
   async function loadUser() {
     try {
       // Uses fetch to call server
-      const response = await fetch();
+      const response = await fetch("/api/users");
       console.log(response);
 
       const retrievedData = await response.json();
