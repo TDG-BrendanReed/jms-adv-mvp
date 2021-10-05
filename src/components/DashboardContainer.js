@@ -149,7 +149,9 @@ function DashboardContainer() {
   }
 
   useEffect(() => {
+    console.log("useEffect ran" + userLoaded);
     if (!userLoaded) {
+      console.log("userloaded if check");
       loadUser();
     }
   });
