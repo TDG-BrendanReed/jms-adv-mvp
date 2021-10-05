@@ -15,12 +15,12 @@ function UserList(users) {
           </tr>
         </thead>
         <tbody>
-          {users.user.map((user, i) => (
+          {users.user.map((userItem, i) => (
             <tr id={i}>
-              <td>{user._id}</td>
-              <td>{user.givenName}</td>
-              <td>{user.surname}</td>
-              <td>{user.userPrincipalName}</td>
+              <td>{userItem._id}</td>
+              <td>{userItem.givenName}</td>
+              <td>{userItem.surname}</td>
+              <td>{userItem.userPrincipalName}</td>
             </tr>
           ))}
         </tbody>
