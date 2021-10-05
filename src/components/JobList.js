@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { Container, Table, Row, Col, Card } from "react-bootstrap";
+import { Container, Table, Row, Col, Card, Form } from "react-bootstrap";
 
 function JobList(props) {
   const [jobArray, setJobArray] = useState(null);
+  const [jobSearch, setJobSearch] = useState(null);
   console.log(props);
   console.log(props.jobList);
   console.log(props.userList);
   console.log(jobArray);
+
+  const handleSearchChange = (e) => {
+    e.preventDefault();
+    console.log(e.target.value.toString());
+    setJobSearch(() => e.target.value.toString());
+  };
+
+  // const filterJobList = (searchTerm) = {
+
+  // }
 
   function displayUserName(userId) {
     const userDisplayNameIndex = props.userList.user.find(
@@ -54,6 +65,10 @@ function JobList(props) {
         const tempJobArray = [...jobArray];
         console.log(tempJobArray);
         tempJobArray[droppableSplit[2]].users = tempArray;
+        // if user coming from another job delete from that job
+        if (source.droppableId !== "AssetBox") {
+          tempArray.splice(source.index, 1);
+        }
         console.log(tempJobArray);
         setJobArray(() => tempJobArray);
         // call update function to update db that user has been allocated
@@ -78,6 +93,11 @@ function JobList(props) {
       // call update function to update db with removed user
     }
   }
+
+  useEffect(() => {
+    console.log("job search changed");
+    console.log(jobSearch);
+  }, [jobSearch]);
 
   useEffect(() => {
     setJobArray(props.jobList.jobs);
@@ -130,7 +150,14 @@ function JobList(props) {
             )}
           </Droppable>
         </Container>
-
+        <br />
+        <Container>
+          <Form.Control
+            type="text"
+            placeholder="Search"
+            handleSearchChange={handleSearchChange}
+          />
+        </Container>
         <br />
         <Container>
           <Row>
@@ -146,7 +173,7 @@ function JobList(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {props.jobList.jobs.map((jobItem, i) => (
+                  {jobArray.map((jobItem, i) => (
                     <tr
                       style={{
                         minHeight: "80px",
