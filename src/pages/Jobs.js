@@ -116,6 +116,9 @@ function DashboardContainer() {
   }, []);
 
   console.log(jobs);
+  console.log(users);
+  const shouldRenderList = users && jobs;
+  console.log(shouldRenderList);
   return (
     <>
       <Container>
@@ -143,7 +146,7 @@ function DashboardContainer() {
         </Form>
         <h6> Job List: </h6>
         <br />
-        {jobs ? (
+        {shouldRenderList ? (
           <JobList jobList={jobs} userList={users} />
         ) : (
           <center>
