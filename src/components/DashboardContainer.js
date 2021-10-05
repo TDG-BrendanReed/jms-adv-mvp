@@ -59,8 +59,7 @@ function DashboardContainer() {
         },
       }
     );
-    setUserLoaded((userLoaded) => !userLoaded);
-    setUserLoaded((userLoaded) => !userLoaded);
+    setUserLoaded(() => false);
   }
 
   async function updateUser(data) {
@@ -83,7 +82,7 @@ function DashboardContainer() {
       }
     );
     // flip user status back to false to force system to collect updated information
-    setUserLoaded((userLoaded) => !userLoaded);
+    setUserLoaded(() => false);
   }
 
   function RequestProfileData(loadStatus) {
