@@ -152,7 +152,7 @@ function DashboardContainer() {
     if (!userLoaded) {
       loadUser();
     }
-  }, [userLoaded]);
+  });
 
   console.log(user);
   return (
