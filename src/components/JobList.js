@@ -21,20 +21,6 @@ function JobList(props) {
 
   // }
 
-  function displayUserName(userId) {
-    const userDisplayNameIndex = props.userList.user.find(
-      (user) => user._id === userId
-    );
-
-    console.log(userDisplayNameIndex);
-
-    if (userDisplayNameIndex) {
-      return userDisplayNameIndex.userData.displayName;
-    } else {
-      return null;
-    }
-  }
-
   function onDragEnd(result) {
     console.log(result);
     const { destination, source, draggableId } = result;
@@ -59,7 +45,9 @@ function JobList(props) {
       console.log(tempArray);
       // check if this id is already in the array for this job
       // if it is then we stop the assignment
-      const checkDuplicate = tempArray.includes(draggableId);
+      const checkDuplicate = tempArray.some(
+        (user) => user.userId === destination.droppableId
+      );
       console.log("check dupe:" + checkDuplicate);
       if (!checkDuplicate) {
         tempArray.splice(destination.index, 0, draggableId);
@@ -94,12 +82,15 @@ function JobList(props) {
       // call update function to update db with removed user
     }
   }
+  // jobSearch changed so we need to filter jobArray as this is our source of truth
 
   useEffect(() => {
     console.log("job search changed");
     console.log(jobSearch);
   }, [jobSearch]);
 
+  // refresh job array if the provided props update
+  // (eg change in database)
   useEffect(() => {
     setJobArray(props.jobList.jobs);
     console.log("use effect ran");
@@ -197,9 +188,11 @@ function JobList(props) {
                                   jobItem.users.map((userItem, i) => (
                                     <div>
                                       <Draggable
-                                        key={jobItem._id + ":" + userItem}
+                                        key={
+                                          jobItem._id + ":" + userItem.userId
+                                        }
                                         draggableId={
-                                          jobItem._id + ":" + userItem
+                                          jobItem._id + ":" + userItem.userId
                                         }
                                         index={i}>
                                         {(provided) => (
@@ -213,7 +206,7 @@ function JobList(props) {
                                                 width: "7rem",
                                               }}>
                                               <Card.Text>
-                                                {displayUserName(userItem)}
+                                                {userItem.displayName}
                                               </Card.Text>
                                             </Card>
                                           </div>
