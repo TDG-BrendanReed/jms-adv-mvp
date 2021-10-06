@@ -140,6 +140,7 @@ function JobList(props) {
       console.log(tempJobArray);
       setJobArray(() => tempJobArray);
       // call update function to update db with removed user
+      updateJobUserAllocation(tempJobArray, droppableSplit[1]);
     }
   }
 
