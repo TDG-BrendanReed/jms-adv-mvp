@@ -36,8 +36,12 @@ function JobList(props) {
         },
       }
     );
+
     console.log("PUT Response: ");
     console.log(response);
+    if (response.status === 204) {
+      props.loadCallback();
+    }
   }
 
   function filterJobList(searchTerm) {
@@ -123,7 +127,6 @@ function JobList(props) {
         setJobArray(() => tempJobArray);
         // call update function to update db that user has been allocated
         updateJobUserAllocation(tempArray, droppableSplit[1]);
-        props.loadCallback();
       } else {
         console.log("duplicate found no action taken");
       }
@@ -144,7 +147,6 @@ function JobList(props) {
       setJobArray(() => tempJobArray);
       // call update function to update db with removed user
       updateJobUserAllocation(tempArray, droppableSplit[1]);
-      props.loadCallback();
     }
   }
 
