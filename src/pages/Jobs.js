@@ -158,7 +158,7 @@ function DashboardContainer() {
         <h6> Job List: </h6>
         <br />
         {shouldRenderList ? (
-          <JobList jobList={jobs} userList={users} />
+          <JobList jobList={jobs} userList={users} loadCallback={loadJob} />
         ) : (
           <center>
             <Spinner variant="primary" animation="grow" role="status">

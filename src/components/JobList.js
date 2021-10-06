@@ -99,7 +99,9 @@ function JobList(props) {
         (user) => user.userId === draggableId
       );
       console.log("check dupe:" + checkDuplicate);
-      const tempUser = props.userList.user.find((user) => user._id);
+      const tempUser = props.userList.user.find(
+        (user) => user._id === draggableId
+      );
       console.log(tempUser);
       const tempDisplayName = tempUser.userData.displayName;
       console.log(tempDisplayName);
@@ -121,6 +123,7 @@ function JobList(props) {
         setJobArray(() => tempJobArray);
         // call update function to update db that user has been allocated
         updateJobUserAllocation(tempArray, droppableSplit[1]);
+        props.loadCallback();
       } else {
         console.log("duplicate found no action taken");
       }
@@ -141,6 +144,7 @@ function JobList(props) {
       setJobArray(() => tempJobArray);
       // call update function to update db with removed user
       updateJobUserAllocation(tempArray, droppableSplit[1]);
+      props.loadCallback();
     }
   }
 
