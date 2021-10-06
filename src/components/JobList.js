@@ -8,7 +8,6 @@ function JobList(props) {
   const [jobSearch, setJobSearch] = useState(null);
 
   const handleSearchChange = (e) => {
-    console.log("firing search change");
     e.preventDefault();
 
     setJobSearch(e.target.value.toString());
@@ -30,8 +29,6 @@ function JobList(props) {
       }
     );
 
-    console.log("PUT Response: ");
-    console.log(response);
     if (response.status === 204) {
       props.loadCallback();
     }
@@ -50,7 +47,7 @@ function JobList(props) {
         const assetCheck = job.assets.some((asset) =>
           regex.test(asset.displayName)
         );
-        console.log(assetCheck);
+
         if (
           regex.test(job.jobNumber) ||
           regex.test(job.description) ||
@@ -63,7 +60,7 @@ function JobList(props) {
           return false;
         }
       });
-      console.log(tempFiltered);
+
       setJobArray(() => tempFiltered);
     } else {
       setJobArray(() => props.jobList.jobs);
