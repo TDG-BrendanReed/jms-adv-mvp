@@ -18,7 +18,6 @@ function Jobs() {
     status: true,
   });
 
-  console.log(jobInput);
   async function loadUser() {
     try {
       // Uses fetch to call server
@@ -26,8 +25,6 @@ function Jobs() {
 
       const retrievedData = await response.json();
 
-      console.log("retrieve user");
-      console.log(retrievedData);
       setUsers(retrievedData);
     } catch (error) {
       // If there is an error, display a generic message on the page
@@ -42,8 +39,6 @@ function Jobs() {
 
       const retrievedData = await response.json();
 
-      console.log("Retrieve job");
-      console.log(retrievedData);
       setJobs(retrievedData);
     } catch (error) {
       // If there is an error, display a generic message on the page
