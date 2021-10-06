@@ -122,6 +122,7 @@ function JobList(props) {
         }
       });
       console.log(tempFiltered);
+      setJobArray(() => tempFiltered);
     }
   }, [jobSearch, jobArray]);
 
