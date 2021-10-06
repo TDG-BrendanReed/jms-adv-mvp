@@ -20,14 +20,8 @@ const jobSchema = new mongoose.Schema({
     default: true, // Set default to false
   },
   prontoData: Object,
-  jobData: {
-    date: String,
-    jobLocation: String,
-  },
-  client: {
-    clientName: String,
-    clientId: String,
-  },
+  jobData: Object,
+  client: Object,
   assets: Array,
   users: Array,
   jobs: Array,
