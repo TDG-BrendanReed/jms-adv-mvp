@@ -3,7 +3,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Container, Table, Row, Col, Card, Form } from "react-bootstrap";
 
 function JobList(props) {
-  const [jobArray, setJobArray] = useState(null);
+  const [jobArray, setJobArray] = useState(props.jobList.jobs);
   const [jobSearch, setJobSearch] = useState(null);
   console.log(props);
   console.log(props.jobList);
@@ -46,11 +46,20 @@ function JobList(props) {
       // check if this id is already in the array for this job
       // if it is then we stop the assignment
       const checkDuplicate = tempArray.some(
-        (user) => user.userId === destination.droppableId
+        (user) => user.userId === draggableId
       );
       console.log("check dupe:" + checkDuplicate);
+      const tempUser = props.userList.user.find((user) => user._id);
+      console.log(tempUser);
+      const tempDisplayName = tempUser.userData.displayName;
+      console.log(tempDisplayName);
+      const insertData = {
+        userId: draggableId,
+        displayName: tempDisplayName,
+      };
+      console.log(insertData);
       if (!checkDuplicate) {
-        tempArray.splice(destination.index, 0, draggableId);
+        tempArray.splice(destination.index, 0, insertData);
         const tempJobArray = [...jobArray];
         console.log(tempJobArray);
         tempJobArray[droppableSplit[2]].users = tempArray;
