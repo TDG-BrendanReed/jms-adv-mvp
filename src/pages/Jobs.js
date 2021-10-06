@@ -129,7 +129,7 @@ function Jobs() {
     const interval = setInterval(() => {
       loadJob();
       loadUser();
-    }, 5000);
+    }, 2500);
 
     return () => clearInterval(interval);
   }, []);

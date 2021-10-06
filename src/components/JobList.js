@@ -72,6 +72,8 @@ function JobList(props) {
       });
       console.log(tempFiltered);
       setJobArray(() => tempFiltered);
+    } else {
+      setJobArray(() => props.jobList.jobs);
     }
   }
 
