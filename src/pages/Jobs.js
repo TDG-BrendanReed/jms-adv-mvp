@@ -4,18 +4,18 @@ import React, { useState, useEffect } from "react";
 import { Spinner, Container, Form, Row, Col, Button } from "react-bootstrap";
 import JobList from "../components/JobList";
 
-function DashboardContainer() {
+function Jobs() {
   const [jobs, setJobs] = useState(null);
   const [users, setUsers] = useState(null);
   const [jobInput, setJobInput] = useState({
-    users: null,
-    assets: null,
+    users: [],
+    assets: [],
     client: {
       clientName: "Client Placeholder",
       clientId: "ClientId Placeholder",
     },
-    jobNumber: null,
-    status: null,
+    jobNumber: "",
+    status: false,
   });
 
   console.log(jobInput);
@@ -85,9 +85,8 @@ function DashboardContainer() {
     e.preventDefault();
     // ... submit to API or something
     // Call server
-    postJob();
+    postJob().then(loadJob());
     // reload the job list
-    loadJob();
   };
 
   /* async function updateJob(input, _id) {
@@ -172,4 +171,4 @@ function DashboardContainer() {
   );
 }
 
-export default DashboardContainer;
+export default Jobs;

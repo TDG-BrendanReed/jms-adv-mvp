@@ -30,7 +30,6 @@ const jobSchema = new mongoose.Schema({
 // Create a model using our schema
 // This model will be used to access the database
 const JobModel = mongoose.model("job", jobSchema);
-console.log(JobModel);
 
 // Export our function
 module.exports = async function (context, req) {
