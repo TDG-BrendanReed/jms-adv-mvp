@@ -96,7 +96,20 @@ function JobList(props) {
   useEffect(() => {
     console.log("job search changed");
     console.log(jobSearch);
-  }, [jobSearch]);
+    const regex = new RegExp(jobSearch, "i");
+    console.log(regex);
+    const tempFiltered = jobArray.filter(
+      (job) =>
+        regex.test(job.jobNumber) ||
+        regex.test(job.description) ||
+        regex.test(job.jobNumber) ||
+        job.users.filter((user) => regex.test(user.displayName)) ||
+        job.assets.filter((asset) => regex.test(asset.displayName)) ||
+        regex.test(job.client.clientName)
+    );
+
+    console.log(tempFiltered);
+  }, [jobSearch, jobArray]);
 
   // refresh job array if the provided props update
   // (eg change in database)
