@@ -10,7 +10,10 @@ function DashboardContainer() {
   const [jobInput, setJobInput] = useState({
     users: null,
     assets: null,
-    client: null,
+    client: {
+      clientName: null,
+      clientId: null,
+    },
     jobNumber: null,
     status: null,
   });
