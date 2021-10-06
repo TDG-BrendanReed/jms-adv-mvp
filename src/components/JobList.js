@@ -19,12 +19,33 @@ function JobList(props) {
     filterJobList(e.target.value.toString());
   };
 
+  async function updateJobUserAllocation(userArray, id) {
+    console.log("made it into user update function");
+    console.log(userArray);
+    console.log(id);
+    const requestBody = userArray;
+    const url = "/api/jobs/jobUserUpdate:" + id;
+    console.log("update URL" + url);
+    const response = await fetch(
+      url, // API location
+      {
+        method: "PUT", // PUT to update item
+        body: JSON.stringify(requestBody), // Add task to body
+        headers: {
+          "Content-Type": "application/json", // Set return type to JSON
+        },
+      }
+    );
+    console.log("PUT Response: ");
+    console.log(response);
+  }
+
   function filterJobList(searchTerm) {
     const regex = new RegExp(searchTerm, "i");
     console.log(regex);
     // make sure there is a value to search...
     if (searchTerm) {
-      const tempFiltered = jobArray.filter((job) => {
+      const tempFiltered = props.jobList.jobs.filter((job) => {
         const userCheck = job.users.some((user) =>
           regex.test(user.displayName)
         );
@@ -99,6 +120,7 @@ function JobList(props) {
         console.log(tempJobArray);
         setJobArray(() => tempJobArray);
         // call update function to update db that user has been allocated
+        updateJobUserAllocation(tempJobArray, droppableSplit[1]);
       } else {
         console.log("duplicate found no action taken");
       }

@@ -96,15 +96,22 @@ async function updateJob(context) {
   // Grab the id from the URL (stored in bindingData)
   const id = context.bindingData.id;
   // Get the task from the body
-  const job = context.req.body;
-  // Update the item in the database
-  const result = await JobModel.updateOne({ jobId: id }, job);
-  // Check to ensure an item was modified
-  if (result.nModified === 1) {
-    // Updated an item, status 204 (empty update)
-    context.res.status = 204;
+  const package = context.req.body;
+  const params = id.split(":");
+  if (params[0] === "jobUserUpdate") {
+    // Update the item in the database
+    const result = await JobModel.updateOne(
+      { _id: params[1] },
+      { $set: { users: package } }
+    );
+    // Check to ensure an item was modified
+    if (result.nModified === 1) {
+      // Updated an item, status 204 (empty update)
+      context.res.status = 204;
+    } else {
+      // Item not found, status 404
+      context.res.status = 404;
+    }
   } else {
-    // Item not found, status 404
-    context.res.status = 404;
   }
 }
