@@ -120,7 +120,7 @@ function DashboardContainer() {
     const interval = setInterval(() => {
       loadJob();
       loadUser();
-    }, 60000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
