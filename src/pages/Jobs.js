@@ -15,7 +15,7 @@ function Jobs() {
       clientId: "ClientId Placeholder",
     },
     jobNumber: "",
-    status: false,
+    status: true,
   });
 
   console.log(jobInput);
