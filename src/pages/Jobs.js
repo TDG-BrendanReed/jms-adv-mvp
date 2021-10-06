@@ -70,19 +70,21 @@ function Jobs() {
   }
 
   const handleChange = (e) => {
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
     e.preventDefault();
-    console.log(e.target.name + " : " + e.target.value.toString());
+    console.log(fieldName + " : " + fieldValue.toString());
     if (e.target.name === "status") {
       // we want boolean for this
       setJobInput((prevState) => ({
         ...prevState,
-        [e.target.name]: e.target.value,
+        fieldName: fieldValue,
       }));
     } else {
       // we want strings for this
       setJobInput((prevState) => ({
         ...prevState,
-        [e.target.name]: e.target.value.toString(),
+        fieldName: fieldValue.toString(),
       }));
     }
   };
