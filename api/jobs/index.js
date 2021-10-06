@@ -13,6 +13,7 @@ mongoose.connect(
 // Create the schema or structure of our object in Mongoose
 const jobSchema = new mongoose.Schema({
   jobNumber: String,
+  jobDescription: String,
   status: {
     // Add completed property
     type: Boolean, // Set type to boolean
@@ -23,7 +24,10 @@ const jobSchema = new mongoose.Schema({
     date: String,
     jobLocation: String,
   },
-  client: String,
+  client: {
+    clientName: String,
+    clientId: String,
+  },
   assets: Array,
   users: Array,
   jobs: Array,

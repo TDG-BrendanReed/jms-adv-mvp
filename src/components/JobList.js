@@ -99,13 +99,10 @@ function JobList(props) {
     const regex = new RegExp(jobSearch, "i");
     console.log(regex);
     const tempFiltered = jobArray.filter(
-      (job) =>
-        regex.test(job.jobNumber) ||
-        regex.test(job.description) ||
-        regex.test(job.jobNumber) ||
-        //        job.users.filter((user) => regex.test(user.displayName)) ||
-        //        job.assets.filter((asset) => regex.test(asset.displayName)) ||
-        regex.test(job.client.clientName)
+      (job) => regex.test(job.jobNumber) || regex.test(job.description)
+      //        job.users.filter((user) => regex.test(user.displayName)) ||
+      //        job.assets.filter((asset) => regex.test(asset.displayName)) ||
+      // regex.test(job.client.clientName)
     );
 
     console.log(tempFiltered);
