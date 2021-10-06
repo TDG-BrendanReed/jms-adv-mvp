@@ -103,8 +103,8 @@ function JobList(props) {
         regex.test(job.jobNumber) ||
         regex.test(job.description) ||
         regex.test(job.jobNumber) ||
-        job.users.filter((user) => regex.test(user.displayName)) ||
-        job.assets.filter((asset) => regex.test(asset.displayName)) ||
+        //        job.users.filter((user) => regex.test(user.displayName)) ||
+        //        job.assets.filter((asset) => regex.test(asset.displayName)) ||
         regex.test(job.client.clientName)
     );
 
