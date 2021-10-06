@@ -11,6 +11,7 @@ function JobList(props) {
   console.log(jobArray);
 
   const handleSearchChange = (e) => {
+    console.log("firing search change");
     e.preventDefault();
     console.log(e.target.value.toString());
     setJobSearch(() => e.target.value.toString());
@@ -155,7 +156,7 @@ function JobList(props) {
           <Form.Control
             type="text"
             placeholder="Search"
-            handleSearchChange={handleSearchChange}
+            handleChange={handleSearchChange}
           />
         </Container>
         <br />
