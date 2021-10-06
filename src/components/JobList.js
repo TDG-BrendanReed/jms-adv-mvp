@@ -98,14 +98,31 @@ function JobList(props) {
     console.log(jobSearch);
     const regex = new RegExp(jobSearch, "i");
     console.log(regex);
-    const tempFiltered = jobArray.filter(
-      (job) => regex.test(job.jobNumber) || regex.test(job.description)
-      //        job.users.filter((user) => regex.test(user.displayName)) ||
-      //        job.assets.filter((asset) => regex.test(asset.displayName)) ||
-      // regex.test(job.client.clientName)
-    );
-
-    console.log(tempFiltered);
+    // make sure there is a value to search...
+    if (jobSearch) {
+      const tempFiltered = jobArray.filter((job) => {
+        const userCheck = job.users.filter((user) =>
+          regex.test(user.displayName)
+        );
+        console.log(userCheck);
+        const assetCheck = job.assets.filter((asset) =>
+          regex.test(asset.displayName)
+        );
+        console.log(assetCheck);
+        if (
+          regex.test(job.jobNumber) ||
+          regex.test(job.description) ||
+          regex.test(job.client.clientName) ||
+          userCheck ||
+          assetCheck
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      console.log(tempFiltered);
+    }
   }, [jobSearch, jobArray]);
 
   // refresh job array if the provided props update
