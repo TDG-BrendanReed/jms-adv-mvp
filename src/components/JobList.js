@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Container, Table, Row, Col, Card, Form } from "react-bootstrap";
@@ -15,11 +16,39 @@ function JobList(props) {
     e.preventDefault();
     console.log(e.target.value.toString());
     setJobSearch(e.target.value.toString());
+    filterJobList(e.target.value.toString());
   };
 
-  // const filterJobList = (searchTerm) = {
-
-  // }
+  function filterJobList(searchTerm) {
+    const regex = new RegExp(searchTerm, "i");
+    console.log(regex);
+    // make sure there is a value to search...
+    if (searchTerm) {
+      const tempFiltered = jobArray.filter((job) => {
+        const userCheck = job.users.some((user) =>
+          regex.test(user.displayName)
+        );
+        console.log(userCheck);
+        const assetCheck = job.assets.some((asset) =>
+          regex.test(asset.displayName)
+        );
+        console.log(assetCheck);
+        if (
+          regex.test(job.jobNumber) ||
+          regex.test(job.description) ||
+          regex.test(job.client.clientName) ||
+          userCheck ||
+          assetCheck
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      console.log(tempFiltered);
+      setJobArray(() => tempFiltered);
+    }
+  }
 
   function onDragEnd(result) {
     console.log(result);
@@ -91,46 +120,13 @@ function JobList(props) {
       // call update function to update db with removed user
     }
   }
-  // jobSearch changed so we need to filter jobArray as this is our source of truth
-
-  useEffect(() => {
-    console.log("job search changed");
-    console.log(jobSearch);
-    const regex = new RegExp(jobSearch, "i");
-    console.log(regex);
-    // make sure there is a value to search...
-    if (jobSearch) {
-      const tempFiltered = jobArray.filter((job) => {
-        const userCheck = job.users.some((user) =>
-          regex.test(user.displayName)
-        );
-        console.log(userCheck);
-        const assetCheck = job.assets.some((asset) =>
-          regex.test(asset.displayName)
-        );
-        console.log(assetCheck);
-        if (
-          regex.test(job.jobNumber) ||
-          regex.test(job.description) ||
-          regex.test(job.client.clientName) ||
-          userCheck ||
-          assetCheck
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-      console.log(tempFiltered);
-      setJobArray(() => tempFiltered);
-    }
-  }, [jobSearch, jobArray]);
 
   // refresh job array if the provided props update
   // (eg change in database)
   useEffect(() => {
     setJobArray(props.jobList.jobs);
     console.log("use effect ran");
+    filterJobList(jobSearch);
   }, [props.jobList.jobs]);
 
   return (
