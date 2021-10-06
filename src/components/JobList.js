@@ -120,7 +120,7 @@ function JobList(props) {
         console.log(tempJobArray);
         setJobArray(() => tempJobArray);
         // call update function to update db that user has been allocated
-        updateJobUserAllocation(tempJobArray, droppableSplit[1]);
+        updateJobUserAllocation(tempArray, droppableSplit[1]);
       } else {
         console.log("duplicate found no action taken");
       }
@@ -140,7 +140,7 @@ function JobList(props) {
       console.log(tempJobArray);
       setJobArray(() => tempJobArray);
       // call update function to update db with removed user
-      updateJobUserAllocation(tempJobArray, droppableSplit[1]);
+      updateJobUserAllocation(tempArray, droppableSplit[1]);
     }
   }
 
