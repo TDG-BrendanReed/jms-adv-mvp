@@ -11,8 +11,8 @@ function DashboardContainer() {
     users: null,
     assets: null,
     client: {
-      clientName: null,
-      clientId: null,
+      clientName: "Client Placeholder",
+      clientId: "ClientId Placeholder",
     },
     jobNumber: null,
     status: null,
@@ -120,7 +120,7 @@ function DashboardContainer() {
     const interval = setInterval(() => {
       loadJob();
       loadUser();
-    }, 2000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
