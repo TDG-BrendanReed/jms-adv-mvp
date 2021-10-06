@@ -14,7 +14,7 @@ function JobList(props) {
     console.log("firing search change");
     e.preventDefault();
     console.log(e.target.value.toString());
-    setJobSearch(() => e.target.value.toString());
+    setJobSearch(e.target.value.toString());
   };
 
   // const filterJobList = (searchTerm) = {
