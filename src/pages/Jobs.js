@@ -74,17 +74,19 @@ function Jobs() {
     const fieldValue = e.target.value;
     e.preventDefault();
     console.log(fieldName + " : " + fieldValue.toString());
-    if (e.target.name === "status") {
+    if (fieldName === "status") {
+      console.log("updating status");
       // we want boolean for this
-      setJobInput((prevState) => ({
-        ...prevState,
-        fieldName: fieldValue,
+      setJobInput((prevJobInput) => ({
+        ...prevJobInput,
+        [fieldName]: fieldValue,
       }));
     } else {
+      console.log("updating string");
       // we want strings for this
-      setJobInput((prevState) => ({
-        ...prevState,
-        fieldName: fieldValue.toString(),
+      setJobInput((prevJobInput) => ({
+        ...prevJobInput,
+        [fieldName]: fieldValue.toString(),
       }));
     }
   };
