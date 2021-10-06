@@ -101,11 +101,11 @@ function JobList(props) {
     // make sure there is a value to search...
     if (jobSearch) {
       const tempFiltered = jobArray.filter((job) => {
-        const userCheck = job.users.filter((user) =>
+        const userCheck = job.users.find((user) =>
           regex.test(user.displayName)
         );
         console.log(userCheck);
-        const assetCheck = job.assets.filter((asset) =>
+        const assetCheck = job.assets.find((asset) =>
           regex.test(asset.displayName)
         );
         console.log(assetCheck);
@@ -199,6 +199,7 @@ function JobList(props) {
                       <th>Assets</th>
                       <th>Job Number</th>
                       <th>Job Status</th>
+                      <th>Client</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -261,6 +262,7 @@ function JobList(props) {
                         <td>
                           {jobItem.status ? <p>Active</p> : <p>Archived</p>}
                         </td>
+                        <td>{jobItem.client.clientName}</td>
                       </tr>
                     ))}
                   </tbody>
