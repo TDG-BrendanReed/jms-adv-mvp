@@ -23,7 +23,6 @@ function Jobs() {
     try {
       // Uses fetch to call server
       const response = await fetch("/api/users/all");
-      console.log(response);
 
       const retrievedData = await response.json();
 
@@ -40,11 +39,10 @@ function Jobs() {
     try {
       // Uses fetch to call server
       const response = await fetch("/api/jobs/all");
-      console.log(response);
 
       const retrievedData = await response.json();
 
-      console.log("retrieve job");
+      console.log("Retrieve job");
       console.log(retrievedData);
       setJobs(retrievedData);
     } catch (error) {
@@ -54,7 +52,6 @@ function Jobs() {
     }
   }
   async function postJob() {
-    console.log(JSON.stringify(jobInput));
     const response = await fetch(
       "/api/jobs", // API location
       {
@@ -73,16 +70,14 @@ function Jobs() {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
     e.preventDefault();
-    console.log(fieldName + " : " + fieldValue.toString());
+
     if (fieldName === "status") {
-      console.log("updating status");
       // we want boolean for this
       setJobInput((prevJobInput) => ({
         ...prevJobInput,
         [fieldName]: fieldValue,
       }));
     } else {
-      console.log("updating string");
       // we want strings for this
       setJobInput((prevJobInput) => ({
         ...prevJobInput,
@@ -134,10 +129,8 @@ function Jobs() {
     return () => clearInterval(interval);
   }, []);
 
-  console.log(jobs);
-  console.log(users);
   const shouldRenderList = users && jobs;
-  console.log(shouldRenderList);
+
   return (
     <>
       <Container>

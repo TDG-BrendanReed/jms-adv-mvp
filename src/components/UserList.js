@@ -2,8 +2,6 @@ import React from "react";
 import { Container, Table, Row, Col } from "react-bootstrap";
 
 function UserList(props) {
-  console.log(props);
-  console.log(props.userList);
   return (
     <>
       <Container>
