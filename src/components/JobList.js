@@ -101,11 +101,11 @@ function JobList(props) {
     // make sure there is a value to search...
     if (jobSearch) {
       const tempFiltered = jobArray.filter((job) => {
-        const userCheck = job.users.find((user) =>
+        const userCheck = job.users.some((user) =>
           regex.test(user.displayName)
         );
         console.log(userCheck);
-        const assetCheck = job.assets.find((asset) =>
+        const assetCheck = job.assets.some((asset) =>
           regex.test(asset.displayName)
         );
         console.log(assetCheck);
