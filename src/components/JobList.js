@@ -156,7 +156,7 @@ function JobList(props) {
           <Form.Control
             type="text"
             placeholder="Search"
-            handleChange={handleSearchChange}
+            onChange={handleSearchChange}
           />
         </Container>
         <br />
