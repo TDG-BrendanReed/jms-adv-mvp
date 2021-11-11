@@ -1,8 +1,10 @@
 {
-    "azureFunctions.deploySubpath": "api",
-    "azureFunctions.postDeployTask": "npm install (functions)",
-    "azureFunctions.projectLanguage": "JavaScript",
-    "azureFunctions.projectRuntime": "~3",
-    "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.preDeployTask": "npm prune (functions)"
+  "azureFunctions.deploySubpath": "api",
+  "azureFunctions.postDeployTask": "npm install (functions)",
+  "azureFunctions.projectLanguage": "JavaScript",
+  "azureFunctions.projectRuntime": "~3",
+  "debug.internalConsoleOptions": "neverOpen",
+  "azureFunctions.preDeployTask": "npm prune (functions)",
+  "appService.defaultWebAppToDeploy": "/subscriptions/6069af51-ad52-4735-97d5-3c990e995225/resourceGroups/JMS-TestEnv-RG/providers/Microsoft.Web/sites/testjmsauth",
+  "appService.deploySubpath": "."
 }
