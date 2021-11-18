@@ -1,6 +1,6 @@
 export const msalConfig = {
   auth: {
-    clientId: "2873d791-862a-4616-b6af-72e9738172fd", // process.env.MSALClientId
+    clientId: process.env.MSALClientId,
     authority: "https://login.microsoftonline.com/common",
     redirectUri: "https://jolly-island-00ddf9c00.azurestaticapps.net/", //"http://localhost:3000", //
   },
