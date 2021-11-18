@@ -1,4 +1,4 @@
-const MSALClientId = process.env.MSALClientId,
+const MSALClientId = process.env.MSALCLIENTID,
 
 export const msalConfig = {
   auth: {
