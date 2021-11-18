@@ -1,4 +1,60 @@
-// Load mongoose
+var ip = require("ip");
+var soap = require("soap");
+var { v4: uuidv4 } = require("uuid");
+var wsdl =
+  "https://onlineavl2api-au.navmanwireless.com/onlineavl/api/V3.0/service.asmx?WSDL";
+var guid = "00000000-0000-0000-0000-000000000000";
+var userName = "tdcs.api";
+var nmPass = "Ccm54FLc";
+var genGuid = uuidv4();
+var appID = genGuid;
+var clientId = genGuid;
+var clientVersion = "19.4.2001.912";
+var ipAddress = ip.address();
+console.log("testing date");
+console.log(new Date().toISOString());
+var dateTime = new Date().toISOString();
+
+soap.createClient(wsdl, function (err, client) {
+  //methods execute here
+  console.log(client.describe());
+  console.log(err);
+  client.addHttpHeader(
+    "SOAPAction",
+    "http://onlineavl2.navmanwireless.com/0907/DoLogin"
+  );
+  client.Service.ServiceSoap.DoLogin(
+    {
+      request: {
+        Session: { SessionId: guid },
+        UserCredential: {
+          UserName: userName,
+          Password: nmPass,
+          ApplicationID: appID,
+          ClientID: clientId,
+          ClientVersion: clientVersion,
+        },
+        IPAddress: ipAddress,
+        ClockVerificationUtc: dateTime,
+      },
+    },
+    function (err, result, rawResponse, soapHeader, rawRequest) {
+      // result is a javascript object
+      // rawResponse is the raw xml response string
+      // soapHeader is the response soap header as a javascript object
+      // rawRequest is the raw xml request string
+      console.log("do login");
+      console.log(rawResponse);
+      console.log(soapHeader);
+      console.log(rawRequest);
+      console.log(result.DoLoginResult);
+      console.log("error");
+      console.log(err);
+    }
+  );
+});
+
+/* // Load mongoose
 const mongoose = require("mongoose");
 // Connect to the database
 mongoose.connect(
@@ -95,3 +151,4 @@ async function updateAsset(context) {
     context.res.status = 404;
   }
 }
+*/

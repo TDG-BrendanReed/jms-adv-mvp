@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:tns="http://onlineavl2.navmanwireless.com/0907/" xmlns:s1="http://microsoft.com/wsdl/types/">
+    <soap:Body>
+    <DoLogin xmlns="http://onlineavl2.navmanwireless.com/0907/">
+        <request>
+            <Session>
+                <SessionId>00000000-0000-0000-0000-000000000000</SessionId>
+            </Session>
+            <UserCredential>
+                <UserName>tdcs.api</UserName>
+                <Password>Ccm54FLc</Password>
+                <ApplicationID>87b6f704-3ce5-4954-9b45-98d536165154</ApplicationID>
+                <ClientID>87b6f704-3ce5-4954-9b45-98d536165154</ClientID>
+                <ClientVersion>19.4.2001.912</ClientVersion>
+            </UserCredential>
+            <IPAddress>172.24.143.177</IPAddress>
+            <ClockVerificationUtc></ClockVerificationUtc>
+        </request>
+    </DoLogin>
+</soap:Body>
+</soap:Envelope>

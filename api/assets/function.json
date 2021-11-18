@@ -6,7 +6,7 @@
       "direction": "in",
       "name": "req",
       "methods": ["get", "post", "put"],
-      "route": "assets/{id?}"
+      "route": "assets"
     },
     {
       "type": "http",
